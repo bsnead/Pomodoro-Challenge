@@ -3667,11 +3667,7 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-<<<<<<< HEAD
-invariant@^2.1.0, invariant@^2.2.1, invariant@^2.2.2:
-=======
-invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
->>>>>>> 24d7f9bbb5bea1be793c53c8f4c5bce7861e4342
+invariant@^2.1.0, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
@@ -5966,7 +5962,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-<<<<<<< HEAD
 react-bootstrap@^0.32.1:
   version "0.32.1"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-0.32.1.tgz#60624c1b48a39d773ef6cce6421a4f33ecc166bb"
@@ -5984,8 +5979,6 @@ react-bootstrap@^0.32.1:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
-=======
->>>>>>> 24d7f9bbb5bea1be793c53c8f4c5bce7861e4342
 react-countdown-clock@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-countdown-clock/-/react-countdown-clock-2.4.0.tgz#870c1500292ac6c62dabd8e615f03f190128ce64"
@@ -6074,13 +6067,12 @@ react-popper@^0.10.0:
     popper.js "^1.14.1"
     prop-types "^15.6.1"
 
-<<<<<<< HEAD
 react-prop-types@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/react-prop-types/-/react-prop-types-0.4.0.tgz#f99b0bfb4006929c9af2051e7c1414a5c75b93d0"
   dependencies:
     warning "^3.0.0"
-=======
+
 react-router-dom@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.3.0.tgz#89b6cbb94f570c6e7e08faaa98962cc1635ab7cf"
@@ -6101,7 +6093,6 @@ react-router@^4.3.0:
     loose-envify "^1.3.1"
     path-to-regexp "^1.7.0"
     prop-types "^15.6.1"
->>>>>>> 24d7f9bbb5bea1be793c53c8f4c5bce7861e4342
 
 react-scripts@1.1.4:
   version "1.1.4"

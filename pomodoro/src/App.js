@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Authentication from "./Authentication";
-import Home from "./Home";
 import fire from "./fire";
 import Timer from "./Timer";
 import TemporaryDrawer from "./TemporaryDrawer";
@@ -14,27 +13,9 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      left: false,
-      route1: "/home",
-      route2: "/timer"
+      left: false
     };
   }
-
-  componentDidMount() {
-    this.authListener();
-  }
-
-  authListener() {
-    fire.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({ user });
-      } else {
-        this.setState({ user: null });
-      }
-    });
-  }
-
   updateField = open => {
     this.setState({
       left: open
@@ -42,15 +23,10 @@ export default class App extends Component {
     console.log("function triggered");
   };
 
-  setPage = () => {
-    this.setState({
-      route: "/timer"
-    });
-  };
-
   renderTimer = () => {
     return (
       <div>
+        {console.log("open timer")}
         <TemporaryDrawer
           updateParent={newVal => this.updateField(newVal)}
           left={this.state.left}
@@ -65,13 +41,7 @@ export default class App extends Component {
       <div>
         <BrowserRouter>
           <div>
-            {this.state.user ? (
-              <Redirect to="/timer" />
-            ) : (
-              <Redirect to="/login" />
-            )}
-
-            <Route path="/login" render={() => <Authentication />} />
+            <Redirect to="/timer" />
             <Route path="/timer" render={() => this.renderTimer()} />
             <Route
               path="/profile"

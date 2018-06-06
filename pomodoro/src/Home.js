@@ -1,24 +1,37 @@
-import React, {Component} from 'react';
-import { Button } from 'react-bootstrap';
-import fire from './fire';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Authentication from "./Authentication";
+import App from "./App";
+import fire from "./fire";
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
+  constructor() {
+    super();
+    this.state = {
+      user: {}
+    };
   }
 
-  logout() {
-    fire.auth().signOut();
+  componentDidMount() {
+    this.authListener();
+  }
+
+  test() {
+    return this.state.user ? <App /> : <Authentication />;
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
+      }
+    });
   }
 
   render() {
-    return (
-      <div>
-        <h1>You Are Home</h1>
-        <Button className="btn btn-secondary" onClick={this.logout}>Logout</Button>
-      </div>
-
-    )
+    return this.test();
   }
 }
