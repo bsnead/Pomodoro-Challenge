@@ -8,6 +8,6 @@ var config = {
    storageBucket: "pomodoro-challenge.appspot.com",
    messagingSenderId: "229770220308"
  };
- firebase.initializeApp(config);
+ const fire = firebase.initializeApp(config);
 
- export default firebase;
+ export default fire;

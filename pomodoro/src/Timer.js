@@ -44,7 +44,7 @@ export default class Timer extends React.Component {
         this.setState ({ paused: !this.state.paused })
     }
 
-    switchTimes = e => {
+   switchTimes = e => {
         if(this.state.time === 5) {
             this.setState({time: 2.5})
         }
@@ -61,6 +61,7 @@ export default class Timer extends React.Component {
             [e.target.name]: e.target.value
         });
     }
+
     render(){
     return (
         <div>
