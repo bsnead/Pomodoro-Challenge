@@ -28,7 +28,8 @@ export default class Profile extends React.Component {
         <AppBar
           position="static"
           style={{
-            backgroundColor: "#cc3737"
+            backgroundColor: "darkred"
+            //backgroundColor: "#cc3737"
           }}
         >
           <Toolbar>
@@ -39,7 +40,7 @@ export default class Profile extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            Profile Page
+            Profile
           </Toolbar>
         </AppBar>
 

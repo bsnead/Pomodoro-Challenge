@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import { ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
 import { Update, Person, Star, ArrowBack } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import fire from "./fire";
 
 const styles = {
   list: {
@@ -19,6 +20,11 @@ const styles = {
 };
 
 class TemporaryDrawer extends React.Component {
+  logout() {
+    console.log("log out");
+    fire.auth().signOut();
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -53,7 +59,7 @@ class TemporaryDrawer extends React.Component {
           </Link>
           <Divider />
 
-          <ListItem button>
+          <ListItem button onClick={e => this.logout()}>
             <ListItemIcon>
               <ArrowBack />
             </ListItemIcon>

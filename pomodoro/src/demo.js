@@ -19,7 +19,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "teal",
     color: theme.palette.common.white
   },
   body: {
@@ -30,11 +30,12 @@ const CustomTableCell = withStyles(theme => ({
 const styles = theme => ({
   root: {
     width: "90%",
+    margin: "auto",
     marginTop: theme.spacing.unit * 3,
     overflowX: "auto"
   },
   table: {
-    minWidth: 700
+    minWidth: 50
   },
   row: {
     "&:nth-of-type(odd)": {
@@ -67,7 +68,8 @@ class CustomizedTable extends React.Component {
         <AppBar
           position="static"
           style={{
-            backgroundColor: "#cc3737"
+            backgroundColor: "darkred"
+            //backgroundColor: "#cc3737"
           }}
         >
           <Toolbar>
@@ -78,7 +80,7 @@ class CustomizedTable extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            Profile Page
+            Leaderboard
           </Toolbar>
         </AppBar>
         <Paper
