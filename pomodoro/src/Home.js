@@ -16,7 +16,7 @@ export default class Home extends Component {
     return (
       <div>
         <h1>You Are Home</h1>
-        <Button className="btn btn-warning" onClick={this.logout}>Logout</Button>
+        <Button className="btn btn-secondary" onClick={this.logout}>Logout</Button>
       </div>
 
     )

@@ -7,6 +7,8 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import { ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
 import { Update, Person, Star, ArrowBack } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+import fire from './fire';
 
 const styles = {
   list: {
@@ -18,40 +20,46 @@ const styles = {
 };
 
 class TemporaryDrawer extends React.Component {
+
+  logout() {
+    fire.auth().signOut();
+  }
+
   render() {
     const { classes } = this.props;
 
     const sideList = (
       <div>
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <Update />
-            </ListItemIcon>
-            <ListItemText primary="Timer" />
-          </ListItem>
-
+          <Link to="/timer">
+            <ListItem button>
+              <ListItemIcon>
+                <Update />
+              </ListItemIcon>
+              <ListItemText primary="Timer" />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link to="/profile">
+            <ListItem button>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link to="/leaderboard">
+            <ListItem button>
+              <ListItemIcon>
+                <Star />
+              </ListItemIcon>
+              <ListItemText primary="Leaderboard" />
+            </ListItem>
+          </Link>
           <Divider />
 
-          <ListItem button>
-            <ListItemIcon>
-              <Person />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-
-          <Divider />
-
-          <ListItem button>
-            <ListItemIcon>
-              <Star />
-            </ListItemIcon>
-            <ListItemText primary="Leaderboard" />
-          </ListItem>
-
-          <Divider />
-
-          <ListItem button>
+          <ListItem button onClick={() => this.logout()}>
             <ListItemIcon>
               <ArrowBack />
             </ListItemIcon>

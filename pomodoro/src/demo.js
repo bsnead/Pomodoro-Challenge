@@ -7,6 +7,15 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import {
+  AppBar,
+  Toolbar,
+  Card,
+  CardContent,
+  Typography,
+  IconButton
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -33,54 +42,83 @@ const styles = theme => ({
     }
   }
 });
+class CustomizedTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: 0,
+      data: [
+        { rank: 1, name: "Ian James McCray", cycles: 36 },
+        { rank: 2, name: "Taylor", cycles: 22 },
+        { rank: 3, name: "Christian", cycles: 21 },
+        { rank: 4, name: "Bailey", cycles: 18 },
+        { rank: 5, name: "Carter", cycles: 15 },
+        { rank: 6, name: "Manana", cycles: 13 },
+        { rank: 7, name: "Edward", cycles: 1 }
+      ]
+    };
+  }
 
-let id = 0;
-function createData(rank, name, cycles) {
-  id += 1;
-  return { rank, name, cycles };
-}
+  render() {
+    const { classes } = this.props;
 
-const data = [
-  createData(1, "Ian James McCray", 36),
-  createData(2, "Taylor", 22),
-  createData(3, "Christian", 21),
-  createData(4, "Bailey", 18),
-  createData(5, "Carter", 15.0),
-  createData(6, "Mariana", 13.0),
-  createData(7, "Edward", 1.0)
-];
-
-function CustomizedTable(props) {
-  const { classes } = props;
-
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <CustomTableCell>Rank</CustomTableCell>
-            <CustomTableCell numeric>Name</CustomTableCell>
-            <CustomTableCell numeric>Completed Timer Cycles</CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(n => {
-            return (
-              <TableRow className={classes.row} key={n.id}>
-                <CustomTableCell component="th" scope="row">
-                  {n.rank}
+    return (
+      <div>
+        <AppBar
+          position="static"
+          style={{
+            backgroundColor: "#cc3737"
+          }}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              style={{ marginLeft: -12, marginRight: 20 }}
+              onClick={e => this.props.updateParent(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            Profile Page
+          </Toolbar>
+        </AppBar>
+        <Paper
+          className={classes.root}
+          style={{
+            marginLeft: 20,
+            marginRight: 20,
+            marginTop: 20,
+            marginBottom: 20
+          }}
+        >
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <CustomTableCell>Rank</CustomTableCell>
+                <CustomTableCell numeric>Name</CustomTableCell>
+                <CustomTableCell numeric>
+                  Completed Timer Cycles
                 </CustomTableCell>
-                <CustomTableCell numeric>{n.name}</CustomTableCell>
-                <CustomTableCell numeric>{n.cycles}</CustomTableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+            </TableHead>
+            <TableBody>
+              {this.state.data.map(n => {
+                return (
+                  <TableRow className={classes.row} key={this.state.id}>
+                    <CustomTableCell component="th" scope="row">
+                      {n.rank}
+                    </CustomTableCell>
+                    <CustomTableCell numeric>{n.name}</CustomTableCell>
+                    <CustomTableCell numeric>{n.cycles}</CustomTableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
+    );
+  }
 }
-
 CustomizedTable.propTypes = {
   classes: PropTypes.object.isRequired
 };

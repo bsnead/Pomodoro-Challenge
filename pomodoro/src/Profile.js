@@ -26,6 +26,7 @@ export default class Profile extends React.Component {
     return (
       <div>
         <AppBar
+          position="static"
           style={{
             backgroundColor: "#cc3737"
           }}
@@ -46,7 +47,7 @@ export default class Profile extends React.Component {
           style={{
             marginLeft: 20,
             marginRight: 20,
-            marginTop: 80,
+            marginTop: 20,
             marginBottom: 20
           }}
         >
