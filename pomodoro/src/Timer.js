@@ -15,8 +15,6 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-
-import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
 import {
   withStyles,
@@ -63,8 +61,9 @@ export default class Timer extends React.Component {
             [e.target.name]: e.target.value
         });
     }
+    render(){
     return (
-      <div>
+      
         <div>
           <AppBar position="static"
             style={{
