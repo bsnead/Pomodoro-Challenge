@@ -22,18 +22,25 @@
  font-size: large;
 }
 
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12vh;
+}
+
 .Work-timer {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 50vh;
 }
 
 .Start-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 0.05vh;
+  height: 5vh;
 }
 
 .Activity-input {

@@ -33,23 +33,25 @@ export default class Timer extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
+          button_text: "Start working", 
           paused: true, 
           activity: "", 
-          time: 5
+          time: 5, 
+          status: "Work now!",
         };
       }
 
-  startTimer = e => {
+    startTimer = e => {
         e.preventDefault();
         this.setState ({ paused: !this.state.paused })
     }
 
     switchTimes = e => {
         if(this.state.time === 5) {
-            this.setState({time: 2.5})
+            this.setState({time: 2.5, button_text: "Start break", status: "Take a break!"})
         }
         else if(this.state.time === 2.5) {
-            this.setState({time: 5})
+            this.setState({time: 5, button_text: "Start working", status: "Work now!"})
         }
         this.setState({
             paused: true
@@ -82,12 +84,15 @@ export default class Timer extends React.Component {
           </Toolbar>
         </AppBar>
         </div>
+        <div className = "status" >
+            <h2> {this.state.status} </h2> 
+        </div> 
         <div className = "Work-timer">
           <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes}/>
         </div>
         <div className = "Start-button"> 
           <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.startTimer}> Start Working </Button>
+            <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
           </MuiThemeProvider>
         </div> 
         <div className = "Activity-input">
