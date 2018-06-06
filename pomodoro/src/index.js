@@ -8,8 +8,3 @@ import Demo from "./demo";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();
-
-const rootElement = document.querySelector("#root");
-if (rootElement) {
-  render(<Demo />, rootElement);
-}
