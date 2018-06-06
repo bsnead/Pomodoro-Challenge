@@ -3,22 +3,32 @@ import ReactDom from 'react-dom';
 
 import ReactCountdownClock from 'react-countdown-clock'
 
-export default class Timer extends React.Component {
 
-    state = {display: false}
+
+export default class Timer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isClicked: false
+        };
+      }
     
-    startTimer = (e) => {
-        this.setState ({ display: true })
+    startTimer = e => {
+        e.preventDefault(); 
+        this.setState ({ isClicked: true })
     }
 
     render() {
-        if (this.state.display) {
-            <ReactCountdownClock seconds={1500} color="#000" alpha={0.9} size={300}/>
+        if (this.state.isClicked) {
+            return (
+                <div> 
+                    <ReactCountdownClock seconds={1500} color="#000" alpha={0.9} size={300}/>
+                </div> 
+            )
         }
-        
         return(
         <div> 
-        <button onClick={e => this.startTimer(e)}>Start</button>
+        <button onClick={this.startTimer}>Start</button>
         </div> 
         )
     }
