@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import ReactCountdownClock from 'react-countdown-clock'
 
+
 import {
   AppBar,
   Toolbar,
@@ -15,20 +16,23 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 
 
-import green from '@material-ui/core/colors/green';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import Button from "@material-ui/core/Button";
+import green from "@material-ui/core/colors/green";
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from "@material-ui/core/styles";
 
 
 const theme = createMuiTheme({
-    palette: {
-      primary: green,
-    },
-  });
-  
+  palette: {
+    primary: green
+  }
+});
 
 export default class Timer extends React.Component {
-    constructor(props) {
+  constructor(props) {
         super(props);
         this.state = {
           workpaused: true,
@@ -37,7 +41,7 @@ export default class Timer extends React.Component {
         };
       }
 
-    startWork = e => {
+  startWork = e => {
         e.preventDefault();
         this.setState ({ workpaused: !this.state.workpaused })
     }
@@ -59,17 +63,20 @@ export default class Timer extends React.Component {
             [e.target.name]: e.target.value
         });
     }
-
-    render() {
-        return(
+    return (
+      <div>
         <div>
-        <AppBar>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              style={{ marginLeft: -12, marginRight: 20 }}
-              onClick={e => this.props.updateParent(true)}
-            >
+          <AppBar position="static"
+            style={{
+              backgroundColor: "#cc3737"
+            }}
+          >
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                style={{ marginLeft: -12, marginRight: 20 }}
+                onClick={e => this.props.updateParent(true)}
+              >
               <MenuIcon />
             </IconButton>
             Timer
@@ -97,4 +104,5 @@ export default class Timer extends React.Component {
         </div>
         )
     }
+
 }
