@@ -3,7 +3,17 @@ import ReactDom from 'react-dom';
 
 import ReactCountdownClock from 'react-countdown-clock'
 
+import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+
+const theme = createMuiTheme({
+    palette: {
+      primary: green,
+    },
+  });
+  
 
 export default class Timer extends React.Component {
     constructor(props) {
@@ -28,7 +38,9 @@ export default class Timer extends React.Component {
         }
         return(
         <div> 
-        <button onClick={this.startTimer}>Start</button>
+        <MuiThemeProvider theme={theme}>
+            <Button variant="contained" color="primary" onClick={this.startTimer}> Start </Button>
+        </MuiThemeProvider>
         </div> 
         )
     }
