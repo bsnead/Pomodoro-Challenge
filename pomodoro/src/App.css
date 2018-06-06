@@ -23,38 +23,25 @@
 }
 
 .Work-timer {
-  width: 35%;
-  height: 200px;
-  float: left;
-  padding: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
 }
 
-.Break-timer {
-  margin-left: 55%;
-  height: 200px;
-  padding: 150px;
+.Start-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 0.05vh;
 }
 
 .Activity-input {
-  padding: 100px;
-  margin-left: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
 }
 
-.Working-button {
-  padding: 30px;
-  margin-left: 40px;
-}
 
-.Break-button {
-  padding: 30px;
-  margin-left: 45px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
