@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import { ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
-import { Update, Person, Star } from "@material-ui/icons";
+import { Update, Person, Star, ArrowBack } from "@material-ui/icons";
 
 const styles = {
   list: {
@@ -18,16 +18,6 @@ const styles = {
 };
 
 class TemporaryDrawer extends React.Component {
-  state = {
-    left: false
-  };
-
-  toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open
-    });
-  };
-
   render() {
     const { classes } = this.props;
 
@@ -40,48 +30,49 @@ class TemporaryDrawer extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Timer" />
           </ListItem>
-        </List>
-        <Divider />
-        <List>
+
+          <Divider />
+
           <ListItem button>
             <ListItemIcon>
               <Person />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-        </List>
-        <Divider />
-        <List>
+
+          <Divider />
+
           <ListItem button>
             <ListItemIcon>
               <Star />
             </ListItemIcon>
             <ListItemText primary="Leaderboard" />
           </ListItem>
-        </List>
-        <Divider />
-        <List>
+
+          <Divider />
+
           <ListItem button>
+            <ListItemIcon>
+              <ArrowBack />
+            </ListItemIcon>
             <ListItemText primary="Logout" />
           </ListItem>
+          <Divider />
         </List>
-        <Divider />
       </div>
     );
 
     return (
       <div>
-        <Button onClick={this.toggleDrawer("left", true)}>Open Left</Button>
-
         <Drawer
-          open={this.state.left}
-          onClose={this.toggleDrawer("left", false)}
+          open={this.props.left}
+          onClose={e => this.props.updateParent(false)}
         >
           <div
             tabIndex={0}
             role="button"
-            onClick={this.toggleDrawer("left", false)}
-            onKeyDown={this.toggleDrawer("left", false)}
+            onClick={e => this.props.updateParent(false)}
+            onKeyDown={e => this.props.updateParent(false)}
           >
             {sideList}
           </div>
