@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-
 import ReactCountdownClock from 'react-countdown-clock'
 
 import {
@@ -9,12 +8,13 @@ import {
   Card,
   CardContent,
   Typography,
-  IconButton
+  IconButton,
+  Button, 
+  TextField
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
 
-import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -31,44 +31,37 @@ export default class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          isClicked: false
+          workpaused: true,
+          breakpaused: true,
+          activity: ""
         };
       }
 
-    startTimer = e => {
+    startWork = e => {
         e.preventDefault();
-        this.setState ({ isClicked: true })
+        this.setState ({ workpaused: !this.state.workpaused })
+    }
+
+    startBreak = e => {
+        e.preventDefault();
+        this.setState ({ breakpaused: false })
+        const activity = this.state.activity; 
+        console.log(activity);
+        // const activityRef = firebase.database().ref('activities');
+        // activityRef.push(activity); 
+        // this.seteState({
+        //     acitiviy: "", 
+        // })
+    }
+
+    onChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
     render() {
-        if (this.state.isClicked) {
-            return (
-                <div>
-                <AppBar >
-                  <Toolbar>
-                    <IconButton
-                      color="inherit"
-                      style={{ marginLeft: -12, marginRight: 20 }}
-                      onClick={e => this.props.updateParent(true)}
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                    Timer
-                  </Toolbar>
-                </AppBar>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                    <ReactCountdownClock seconds={1500} color="#000" alpha={0.9} size={300}/>
-                </div>
-            )
-        }
         return(
-
         <div>
         <AppBar>
           <Toolbar>
@@ -83,22 +76,25 @@ export default class Timer extends React.Component {
           </Toolbar>
         </AppBar>
         <br/>
-
         <br/>
         <br/>
         <br/>
         <br/>
         <br/>
         <br/>
-        <button onClick={this.startTimer}>Start</button>
-        </div>
-
-        <div> 
+        <ReactCountdownClock seconds={1500} color="#000" alpha={0.9} size={300} paused={this.state.workpaused}/>
         <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.startTimer}> Start </Button>
-        </MuiThemeProvider>
-        </div> 
+            <Button variant="contained" color="primary" onClick={this.startWork}> Start Working </Button>
+        </MuiThemeProvider>       
 
+        <ReactCountdownClock seconds={300} color="#000" alpha={0.9} size={300} paused={this.state.breakpaused}/>
+        <MuiThemeProvider theme={theme}>
+            <Button variant="contained" color="primary" onClick={this.startBreak}> Start Break </Button>
+        </MuiThemeProvider>  
+
+        <br />
+        <TextField name="activity" placeholder="activity" onChange={this.onChange}/> 
+        </div>
         )
     }
 }
