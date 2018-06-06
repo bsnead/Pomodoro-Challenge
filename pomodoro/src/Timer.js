@@ -33,27 +33,27 @@ export default class Timer extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
-          paused: true,
-          activity: "",
+          paused: true, 
+          activity: "", 
           time: 5
         };
       }
 
-    startTimer = e => {
+  startTimer = e => {
         e.preventDefault();
         this.setState ({ paused: !this.state.paused })
     }
 
-    switchTimes = e => {
-      if(this.state.time === 5) {
-        this.setState({time: 2.5})
-      }
-      else if(this.state.time === 2.5) {
-        this.setState({time:5})
-      }
-      this.setState({
-        paused: true
-      })
+   switchTimes = e => {
+        if(this.state.time === 5) {
+            this.setState({time: 2.5})
+        }
+        else if(this.state.time === 2.5) {
+            this.setState({time: 5})
+        }
+        this.setState({
+            paused: true
+        })
     }
 
     onChange = e => {
@@ -84,15 +84,13 @@ export default class Timer extends React.Component {
         </AppBar>
         </div>
         <div className = "Work-timer">
-          <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300}
-          paused={this.state.paused}
-          onComplete={this.switchTimes}/>
-          <div className = "Working-button">
-            <MuiThemeProvider theme={theme}>
-                <Button variant="contained" color="primary" onClick={this.startTimer}> Start Working </Button>
-            </MuiThemeProvider>
-          </div>
+          <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes}/>
         </div>
+        <div className = "Start-button"> 
+          <MuiThemeProvider theme={theme}>
+            <Button variant="contained" color="primary" onClick={this.startTimer}> Start Working </Button>
+          </MuiThemeProvider>
+        </div> 
         <div className = "Activity-input">
           <TextField name="activity" placeholder="activity" onChange={this.onChange}/>
         </div>
