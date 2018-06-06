@@ -7,6 +7,17 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import {
+  AppBar,
+  Toolbar,
+  Card,
+  CardContent,
+  Typography,
+  IconButton
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import firebase from './firebase.js'
+import sortBy from "lodash/sortBy"
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -34,53 +45,100 @@ const styles = theme => ({
   }
 });
 
-let id = 0;
-function createData(rank, name, cycles) {
-  id += 1;
-  return { rank, name, cycles };
-}
+class CustomizedTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id:0,
+      data: []
+    };
+  }
 
-const data = [
-  createData(1, "Ian James McCray", 36),
-  createData(2, "Taylor", 22),
-  createData(3, "Christian", 21),
-  createData(4, "Bailey", 18),
-  createData(5, "Carter", 15.0),
-  createData(6, "Mariana", 13.0),
-  createData(7, "Edward", 1.0)
-];
+  componentDidMount(){
+    const usersRef = firebase.database().ref('users');
+    usersRef.on('value', (snapshot) => {
+    let users = snapshot.val();
+    let newState = [];
 
-function CustomizedTable(props) {
-  const { classes } = props;
+    for (let user in users) {
+      newState.push({
+        name: users[user].name,
+        numCycles: users[user].cycles,
+        index: 0
+      });
+    }
 
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <CustomTableCell>Rank</CustomTableCell>
-            <CustomTableCell numeric>Name</CustomTableCell>
-            <CustomTableCell numeric>Completed Timer Cycles</CustomTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(n => {
-            return (
-              <TableRow className={classes.row} key={n.id}>
-                <CustomTableCell component="th" scope="row">
-                  {n.rank}
+    newState.sort((a, b) => a.numCycles < b.numCycles)
+        .map((user, i) => 
+        <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
+      );
+
+      this.setState({
+        data: newState
+      });
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        <AppBar
+          position="static"
+          style={{
+            backgroundColor: "#cc3737"
+          }}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              style={{ marginLeft: -12, marginRight: 20 }}
+              onClick={e => this.props.updateParent(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            Profile Page
+          </Toolbar>
+        </AppBar>
+        <Paper
+          className={classes.root}
+          style={{
+            marginLeft: 20,
+            marginRight: 20,
+            marginTop: 20,
+            marginBottom: 20
+          }}
+        >
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <CustomTableCell>Rank</CustomTableCell>
+                <CustomTableCell numeric>Name</CustomTableCell>
+                <CustomTableCell numeric>
+                  Completed Timer Cycles
                 </CustomTableCell>
-                <CustomTableCell numeric>{n.name}</CustomTableCell>
-                <CustomTableCell numeric>{n.cycles}</CustomTableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+            </TableHead>
+            <TableBody>
+              {this.state.data.map(n => {
+                return (
+                  <TableRow className={classes.row} key={this.state.id}>
+                    <CustomTableCell component="th" scope="row">
+                      {n.index += 1 }
+                    </CustomTableCell>
+                    <CustomTableCell numeric>{n.name}</CustomTableCell>
+                    <CustomTableCell numeric>{n.numCycles}</CustomTableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
+    );
+  }
 }
-
 CustomizedTable.propTypes = {
   classes: PropTypes.object.isRequired
 };
