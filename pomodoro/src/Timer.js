@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 
 import ReactCountdownClock from 'react-countdown-clock'
+
 import {
   AppBar,
   Toolbar,
@@ -12,6 +13,19 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
+
+import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+
+const theme = createMuiTheme({
+    palette: {
+      primary: green,
+    },
+  });
+  
 
 export default class Timer extends React.Component {
     constructor(props) {
@@ -54,6 +68,7 @@ export default class Timer extends React.Component {
             )
         }
         return(
+
         <div>
         <AppBar>
           <Toolbar>
@@ -77,6 +92,13 @@ export default class Timer extends React.Component {
         <br/>
         <button onClick={this.startTimer}>Start</button>
         </div>
+
+        <div> 
+        <MuiThemeProvider theme={theme}>
+            <Button variant="contained" color="primary" onClick={this.startTimer}> Start </Button>
+        </MuiThemeProvider>
+        </div> 
+
         )
     }
 }
