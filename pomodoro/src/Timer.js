@@ -10,7 +10,7 @@ import {
   CardContent,
   Typography,
   IconButton,
-  Button, 
+  Button,
   TextField
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -47,12 +47,12 @@ export default class Timer extends React.Component {
     startBreak = e => {
         e.preventDefault();
         this.setState ({ breakpaused: false })
-        const activity = this.state.activity; 
+        const activity = this.state.activity;
         console.log(activity);
         // const activityRef = firebase.database().ref('activities');
-        // activityRef.push(activity); 
+        // activityRef.push(activity);
         // this.seteState({
-        //     acitiviy: "", 
+        //     acitiviy: "",
         // })
     }
 
@@ -63,7 +63,7 @@ export default class Timer extends React.Component {
     }
     render(){
     return (
-      
+        <div>
         <div>
           <AppBar position="static"
             style={{
@@ -81,25 +81,26 @@ export default class Timer extends React.Component {
             Timer
           </Toolbar>
         </AppBar>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <ReactCountdownClock seconds={1500} color="#000" alpha={0.9} size={300} paused={this.state.workpaused}/>
-        <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.startWork}> Start Working </Button>
-        </MuiThemeProvider>       
-
-        <ReactCountdownClock seconds={300} color="#000" alpha={0.9} size={300} paused={this.state.breakpaused}/>
-        <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.startBreak}> Start Break </Button>
-        </MuiThemeProvider>  
-
-        <br />
-        <TextField name="activity" placeholder="activity" onChange={this.onChange}/> 
+        </div>
+        <div className = "Work-timer">
+          <ReactCountdownClock seconds={1500} color="#000" alpha={0.9} size={300} paused={this.state.workpaused}/>
+          <div className = "Working-button">
+            <MuiThemeProvider theme={theme}>
+                <Button variant="contained" color="primary" onClick={this.startWork}> Start Working </Button>
+            </MuiThemeProvider>
+          </div>
+        </div>
+        <div className = "Break-timer">
+          <ReactCountdownClock seconds={300} color="#000" alpha={0.9} size={300} paused={this.state.breakpaused}/>
+          <div className = "Break-button">
+            <MuiThemeProvider theme={theme}>
+                <Button variant="contained" color="primary" onClick={this.startBreak}> Start Break </Button>
+            </MuiThemeProvider>
+          </div>
+        </div>
+        <div className = "Activity-input">
+          <TextField name="activity" placeholder="activity" onChange={this.onChange}/>
+        </div>
         </div>
         )
     }
