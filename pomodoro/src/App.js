@@ -5,6 +5,8 @@ import Authentication from './Authentication';
 import Home from './Home';
 import fire from './fire';
 
+import Timer from './Timer';
+
 class App extends Component {
 
   constructor(props) {
@@ -30,8 +32,10 @@ class App extends Component {
 
   render() {
     return (
+
       <div>
         {this.state.user ? (<Home />) : (<Authentication />)}
+
       </div>
     );
   }
