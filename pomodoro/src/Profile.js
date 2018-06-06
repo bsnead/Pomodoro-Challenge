@@ -25,7 +25,11 @@ export default class Profile extends React.Component {
   render() {
     return (
       <div>
-        <AppBar>
+        <AppBar
+          style={{
+            backgroundColor: "#cc3737"
+          }}
+        >
           <Toolbar>
             <IconButton
               color="inherit"
