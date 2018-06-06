@@ -7,6 +7,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import { ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
 import { Update, Person, Star, ArrowBack } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const styles = {
   list: {
@@ -24,31 +25,32 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div>
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <Update />
-            </ListItemIcon>
-            <ListItemText primary="Timer" />
-          </ListItem>
-
+          <Link to="/timer">
+            <ListItem button>
+              <ListItemIcon>
+                <Update />
+              </ListItemIcon>
+              <ListItemText primary="Timer" />
+            </ListItem>
+          </Link>
           <Divider />
-
-          <ListItem button>
-            <ListItemIcon>
-              <Person />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-
+          <Link to="/profile">
+            <ListItem button>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItem>
+          </Link>
           <Divider />
-
-          <ListItem button>
-            <ListItemIcon>
-              <Star />
-            </ListItemIcon>
-            <ListItemText primary="Leaderboard" />
-          </ListItem>
-
+          <Link to="/leaderboard">
+            <ListItem button>
+              <ListItemIcon>
+                <Star />
+              </ListItemIcon>
+              <ListItemText primary="Leaderboard" />
+            </ListItem>
+          </Link>
           <Divider />
 
           <ListItem button>
