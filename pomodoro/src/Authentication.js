@@ -5,7 +5,7 @@ import { Button, Row, Col, grid } from "react-bootstrap";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import logo from "./tomatologo.png";
-import "./Authentication.css";
+//import "./Authentication.css";
 import { createMuiTheme } from "@material-ui/core/styles";
 import teal from "@material-ui/core/colors/teal";
 
@@ -27,27 +27,33 @@ export default class Authentication extends Component {
   renderContent = () => {
     if (this.state.activeIndex == 0) {
       return (
-        <Row className="show-grid">
-          <Col xs={6}>
-            <Button
-              bsSize="large"
-              bsStyle="info"
-              onClick={() => this.onSignUp()}
-            >
-              Sign Up
-            </Button>
-          </Col>
-          <Col xs={6}>
-            <Button
-              bsSize="large"
-              bsStyle="info"
-              onClick={() => this.onSignIn()}
-            >
-              Sign In
-            </Button>
-          </Col>
-        </Row>
+        <div className="row">
+          <div className="col-sm-2 offset-3">
+            <div className="container">
+              <Button
+                bsSize="large"
+                bsStyle="info"
+                onClick={() => this.onSignUp()}
+              >
+                Sign Up
+              </Button>
+            </div>
+          </div>
+          <div className="col-sm-2">
+            <div className="container">
+              <Button
+                bsSize="large"
+                bsStyle="info"
+                onClick={() => this.onSignIn()}
+              >
+                Sign In
+              </Button>
+            </div>
+          </div>
+        </div>
       );
+    } else if (this.state.activeIndex == 1) {
+      return <SignUpForm goBack={this.goBack} />;
     } else if (this.state.activeIndex == 1) {
       return <SignUpForm goBack={this.goBack} />;
     } else {

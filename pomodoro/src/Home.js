@@ -9,14 +9,17 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      updated: false
     };
   }
 
   //issue because componentDidMount() gets called after render
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
+    console.log("componentWillMount");
     this.authListener();
   }
+
 
   test() {
     return this.state.user ? <App /> : <Authentication />;
@@ -25,14 +28,20 @@ export default class Home extends Component {
   authListener() {
     fire.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user });
+        this.setState({ user: user, updated: true });
       } else {
-        this.setState({ user: null });
+        this.setState({ user: null, updated: true });
       }
     });
   }
 
   render() {
-    return this.test();
+    console.log("render");
+    if (this.state.updated) {
+      return this.test();
+    }
+    else {
+      return null;
+    }
   }
 }

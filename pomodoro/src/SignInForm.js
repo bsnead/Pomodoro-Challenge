@@ -50,9 +50,18 @@ export default class SignInForm extends Component {
             onChange={(e) => this.handlePasswordChange(e)}
           />
         </FormGroup>
-
-        <Button bsStyle="success" onClick={(e) => this.login(e)}>Sign In</Button>
-        <Button bsStyle="danger" onClick={this.props.goBack}>Back</Button>
+        <div className="row">
+          <div className="col-sm-1 mr-3">
+            <div className="container">
+              <Button bsStyle="success" onClick={(e) => this.login(e)}>Sign In</Button>
+            </div>
+          </div>
+          <div className="col-sm-1">
+            <div className="container">
+              <Button bsStyle="danger" onClick={this.props.goBack}>Back</Button>
+            </div>
+          </div>
+        </div>
       </form>
     )
   }

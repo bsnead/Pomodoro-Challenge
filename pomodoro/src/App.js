@@ -13,9 +13,25 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      left: false
-    };
-  }
+      user: {},
+      left: false,
+
+    }
+  };
+
+  componentDidMount() {
+    this.authListener();
+  };
+
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({user: null});
+      }
+    });};
+
   updateField = open => {
     this.setState({
       left: open
