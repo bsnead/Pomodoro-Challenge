@@ -41,7 +41,7 @@ export default class SignupForm extends Component {
   handleEmailError = () => {
     if (this.state.email.length < 1) {
       return (
-        <FormError name="Email"/>
+        <FormError name="Email" />
       )
     }
   }
@@ -49,7 +49,7 @@ export default class SignupForm extends Component {
   handleNameError = () => {
     if (this.state.name.length < 1) {
       return (
-        <FormError name="Name"/>
+        <FormError name="Name" />
       )
     }
   }
@@ -57,7 +57,7 @@ export default class SignupForm extends Component {
   handlePasswordError = () => {
     if (this.state.password.length < 1) {
       return (
-        <FormError name="Password"/>
+        <FormError name="Password" />
       )
     }
   }
@@ -101,11 +101,10 @@ export default class SignupForm extends Component {
     return (
       <div>
         <h1>Sign Up</h1>
-        <div className="col-6 offset-6 container" style={{backgroundColor: '#93bcff', borderRadius: 20}}>
         <form>
-          <FormGroup className="pt-3">
+          <FormGroup >
             <TextField
-              style={{borderBottomColor: purple[500]}}
+
               id="name"
               label="Name"
               fullWidth
@@ -116,7 +115,7 @@ export default class SignupForm extends Component {
           </FormGroup>
           <FormGroup>
             <TextField
-              style={{borderBottomColor: purple[500]}}
+
               id="email"
               label="Email"
               fullWidth
@@ -127,7 +126,7 @@ export default class SignupForm extends Component {
           </FormGroup>
           <FormGroup>
             <TextField
-              style={{borderBottomColor: purple[500]}}
+
               id="password"
               label="Password"
               fullWidth
@@ -138,13 +137,13 @@ export default class SignupForm extends Component {
           </FormGroup>
           <div className="row">
             <div className="col-sm-3 pb-4">
-              <div className="container mb-3">
+              <div >
                 <Button className="mb-3" variant="contained" color="primary" onClick={(e) => this.signup(e)} disabled={this.state.formNotValid} >Submit</Button>
               </div>
             </div>
             <div className="col-sm-3">
               <div className="container">
-                <Button variant="contained" color="secondary" onClick={this.props.goBack}>Back</Button>
+                <Button variant="outlined" onClick={this.props.goBack}>Back</Button>
               </div>
             </div>
 
@@ -152,7 +151,7 @@ export default class SignupForm extends Component {
 
         </form>
       </div>
-  </div>
+
     )
   }
 }
