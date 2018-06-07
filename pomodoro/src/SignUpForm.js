@@ -27,6 +27,17 @@ export default class SignupForm extends Component {
     }).catch((error) => {
       console.log(error);
     })
+
+    function writeUserData(userId, name, email, password) {
+        fire.database().ref('pomodoro-challenge/users/' + userId).set({
+          username: email,
+          email: email,
+          password: password,
+          name: name
+        });
+      }
+    
+    writeUserData(this.state.email, this.state.email, "Derrick", this.state.password);
   }
 
   render() {
