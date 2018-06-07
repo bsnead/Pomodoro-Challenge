@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import ReactCountdownClock from 'react-countdown-clock'
-
+import fire from './fire.js'; 
 
 import {
   AppBar,
@@ -33,11 +33,13 @@ export default class Timer extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
+          user: '',
           button_text: "Start working", 
           paused: true, 
           activity: "", 
           time: 5, 
           status: "Work now!",
+          activities: []
         };
       }
 
@@ -59,12 +61,35 @@ export default class Timer extends React.Component {
     }
 
     onChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+      this.setState({
+        activity: e.target.value
+      });
     }
+    
+    // onSubmit = e => {
+    //     e.preventDefault();
+    //     const usersRef = fire.database().ref('users');
+    //     usersRef.on('value', (snapshot) => {
+    //     let users = snapshot.val();
+    //     let newState = [];
+        
+    //     var user1 = fire.auth().currentUser;
+    //       var email1;
+    //       if (user1 != null) {
+    //         email1 = user1.email;
+    //     }
+        
+    //     for (let user in users){
+    //       if (users[user].email === email1){
+    //         this.setState({
+    //           user: users[user]
+    //         })
+    //       }   
+    //     }
+    //   });
+    // }
 
-    render(){
+    render() {
     return (
         <div>
         <div>
@@ -88,7 +113,8 @@ export default class Timer extends React.Component {
         <div className = "status" >
             <h2> {this.state.status} </h2> 
         </div> 
-        <div className = "Work-timer">
+
+        <div className = "Work-timer" >
           <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes}/>
         </div>
         <div className = "Start-button"> 
@@ -97,10 +123,13 @@ export default class Timer extends React.Component {
           </MuiThemeProvider>
         </div> 
         <div className = "Activity-input">
-          <TextField name="activity" placeholder="activity" onChange={this.onChange}/>
+          <TextField name="activity" placeholder="activity" onChange={this.onChange} />
+          <MuiThemeProvider theme={theme}>
+            <Button variant="contained" color="primary" onClick={this.onSubmit}> Submit </Button>
+          </MuiThemeProvider>
         </div>
+
         </div>
         )
-    }
-
+      }
 }
