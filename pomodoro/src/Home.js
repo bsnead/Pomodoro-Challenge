@@ -9,10 +9,11 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      user: {}
+      user: null
     };
   }
 
+  //issue because componentDidMount() gets called after render
   componentDidMount() {
     this.authListener();
   }
