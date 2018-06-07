@@ -40,7 +40,7 @@ export default class SignupForm extends Component {
       email: this.state.email,
       password: this.state.password,
       name: this.state.name,
-      numCycles: this.state.activities,
+      numCycles: this.state.numCycles,
       activities: this.state.activities,
       totalTime: this.state.totalTime
     };

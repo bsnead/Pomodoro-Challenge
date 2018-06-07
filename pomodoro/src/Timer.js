@@ -48,7 +48,7 @@ export default class Timer extends React.Component {
         this.setState ({ paused: !this.state.paused })
     }
 
-   switchTimes = e => {
+     switchTimes = e => {
         if(this.state.time === 5) {
             this.setState({time: 2.5, button_text: "Start break", status: "Take a break!"})
         }
@@ -60,34 +60,41 @@ export default class Timer extends React.Component {
         })
     }
 
-    onChange = e => {
+    Change = e => {
       this.setState({
-        activity: e.target.value
+        activity: e.target.value, 
       });
     }
     
-    // onSubmit = e => {
-    //     e.preventDefault();
-    //     const usersRef = fire.database().ref('users');
-    //     usersRef.on('value', (snapshot) => {
-    //     let users = snapshot.val();
-    //     let newState = [];
-        
-    //     var user1 = fire.auth().currentUser;
-    //       var email1;
-    //       if (user1 != null) {
-    //         email1 = user1.email;
-    //     }
-        
-    //     for (let user in users){
-    //       if (users[user].email === email1){
-    //         this.setState({
-    //           user: users[user]
-    //         })
-    //       }   
-    //     }
-    //   });
-    // }
+    onSubmit = e => {
+        e.preventDefault();
+        const usersRef = fire.database().ref('users');
+        usersRef.on('value', (snapshot) => {
+        let users = snapshot.val();
+        let newState = [];
+
+        var user1 = fire.auth().currentUser;
+          var email1;
+          if (user1 != null) {
+            email1 = user1.email;
+        }
+
+        let i=0;
+        let vals = Object.values(users);
+        for(i; i<vals.length; i++){
+          if(email1 === vals[i].email){
+            break            
+          }
+        }
+
+        let userID = Object.keys(users)[i];
+        var hopperRef = usersRef.child(userID);
+        this.state.activities.push(this.state.activity)
+        hopperRef.update({
+          "activity": this.state.activities
+        });
+      });
+    }
 
     render() {
     return (
@@ -123,7 +130,7 @@ export default class Timer extends React.Component {
           </MuiThemeProvider>
         </div> 
         <div className = "Activity-input">
-          <TextField name="activity" placeholder="activity" onChange={this.onChange} />
+          <TextField name="activity" placeholder="activity" onChange={this.Change} />
           <MuiThemeProvider theme={theme}>
             <Button variant="contained" color="primary" onClick={this.onSubmit}> Submit </Button>
           </MuiThemeProvider>
