@@ -1,6 +1,8 @@
-import React from "react";
-import ReactDom from "react-dom";
-import ReactCountdownClock from "react-countdown-clock";
+import React from 'react';
+import ReactDom from 'react-dom';
+import ReactCountdownClock from 'react-countdown-clock'
+import "./App.css";
+
 
 import {
   AppBar,
@@ -10,7 +12,7 @@ import {
   Typography,
   IconButton,
   Button,
-  TextField
+  TextField, Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -35,12 +37,15 @@ export default class Timer extends React.Component {
       paused: true,
       activity: "",
       time: 5,
-      status: "Work now!"
+
+      status: "Work now!",
+
     };
   }
 
   startTimer = e => {
     e.preventDefault();
+
     this.setState({ paused: !this.state.paused });
   };
 
@@ -67,16 +72,19 @@ export default class Timer extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+
   };
+
 
   render() {
     return (
       <div>
         <div>
-          <AppBar
-            position="static"
+          <AppBar position="static"
             style={{
-              backgroundColor: "darkred"
+              backgroundColor: "darkred",
+              marginBottom: 20
+
             }}
           >
             <Toolbar>
@@ -88,42 +96,34 @@ export default class Timer extends React.Component {
                 <MenuIcon />
               </IconButton>
               Timer
-            </Toolbar>
+
+          </Toolbar>
           </AppBar>
         </div>
-        <div className="status">
+
+        <div className="status" >
           <h2> {this.state.status} </h2>
         </div>
-        <div className="Work-timer">
-          <ReactCountdownClock
-            seconds={this.state.time}
-            color="#000"
-            alpha={0.9}
-            size={300}
-            paused={this.state.paused}
-            onComplete={this.switchTimes}
-          />
+
+        <div id="parappa">
+          <div className="Work-timer">
+            <ReactCountdownClock style={{ marginTop: 40, marginBottom: 40 }} seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
+          </div>
+
+          <div className="Start-button">
+            <MuiThemeProvider theme={theme} >
+              <Button style={{ position: "fixed", marginTop: 40, marginBottom: 40 }} position="static" variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
+            </MuiThemeProvider>
+          </div>
+
+          <div className="Activity-input">
+            <TextField style={{ position: "static", marginTop: 70, marginBottom: 40 }} position="static" name="activity" placeholder="activity" onChange={this.onChange} />
+          </div>
         </div>
-        <div className="Start-button">
-          <MuiThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.startTimer}
-            >
-              {" "}
-              {this.state.button_text}{" "}
-            </Button>
-          </MuiThemeProvider>
-        </div>
-        <div className="Activity-input">
-          <TextField
-            name="activity"
-            placeholder="activity"
-            onChange={this.onChange}
-          />
-        </div>
+
       </div>
-    );
+    )
   }
+
+
 }
