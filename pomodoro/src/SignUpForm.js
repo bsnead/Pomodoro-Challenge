@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { form, FormGroup, ControlLabel, Button, FormControl } from 'react-bootstrap';
+import { form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField';
 import fire from './fire';
+import Button from '@material-ui/core/Button';
+import FormError from './FormError';
+import purple from '@material-ui/core/colors/purple';
 
 export default class SignupForm extends Component {
   constructor() {
@@ -13,15 +17,60 @@ export default class SignupForm extends Component {
       activities: [],
       totalTime: 0,
       user: [],
+      nameValid: false,
+      emailValid: false,
+      formNotValid: true
     }
+    this.onDisable = this.onDisable.bind(this)
 
+  }
+
+
+  onDisable = () => {
+    if (this.state.email.length < 1 || this.state.name.length < 1 || this.state.password.length < 1) {
+      this.setState({
+        formNotValid: true
+      })
+    } else {
+      this.setState({
+        formNotValid: false
+      })
+    }
+  }
+
+  handleEmailError = () => {
+    if (this.state.email.length < 1) {
+      return (
+        <FormError name="Email"/>
+      )
+    }
+  }
+
+  handleNameError = () => {
+    if (this.state.name.length < 1) {
+      return (
+        <FormError name="Name"/>
+      )
+    }
+  }
+
+  handlePasswordError = () => {
+    if (this.state.password.length < 1) {
+      return (
+        <FormError name="Password"/>
+      )
+    }
   }
 
   handleUserInput = e => {
 
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.id]: e.target.value
     })
+    this.setState({
+      formNotValid: false
+    })
+
   }
 
   signup = e => {
@@ -40,7 +89,7 @@ export default class SignupForm extends Component {
       email: this.state.email,
       password: this.state.password,
       name: this.state.name,
-      numCycles: this.state.activities,
+      numCycles: this.state.numCycles,
       activities: this.state.activities,
       totalTime: this.state.totalTime
     };
@@ -50,54 +99,60 @@ export default class SignupForm extends Component {
 
   render() {
     return (
-      <form>
-        <FormGroup>
-          <ControlLabel>Name</ControlLabel>
-          <FormControl
-            type="text"
-            name="name"
-            value={this.state.name}
-            placeholder="Enter Name"
-            onChange={(e) => this.handleUserInput(e)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
-            name="email"
-            type="text"
-            value={this.state.email}
-            placeholder="Enter Email"
-            onChange={(e) => this.handleUserInput(e)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            type="text"
-            name="password"
-            value={this.state.password}
-            placeholder="Enter Password"
-            onChange={(e) => this.handleUserInput(e)}
-          />
-        </FormGroup>
-
-        <div className="row">
-          <div className="col-sm-1 mr-4">
-            <div className="container">
-              <Button bsStyle="success" onClick={(e) => this.signup(e)}>Sign Up</Button>
+      <div>
+        <h1>Sign Up</h1>
+        <div className="col-6 offset-6 container" style={{backgroundColor: '#93bcff', borderRadius: 20}}>
+        <form>
+          <FormGroup className="pt-3">
+            <TextField
+              style={{borderBottomColor: purple[500]}}
+              id="name"
+              label="Name"
+              fullWidth
+              value={this.state.name}
+              onChange={(e) => this.handleUserInput(e)}
+            />
+            {this.handleNameError()}
+          </FormGroup>
+          <FormGroup>
+            <TextField
+              style={{borderBottomColor: purple[500]}}
+              id="email"
+              label="Email"
+              fullWidth
+              value={this.state.email}
+              onChange={(e) => this.handleUserInput(e)}
+            />
+            {this.handleEmailError()}
+          </FormGroup>
+          <FormGroup>
+            <TextField
+              style={{borderBottomColor: purple[500]}}
+              id="password"
+              label="Password"
+              fullWidth
+              value={this.state.password}
+              onChange={(e) => this.handleUserInput(e)}
+            />
+            {this.handlePasswordError()}
+          </FormGroup>
+          <div className="row">
+            <div className="col-sm-3 pb-4">
+              <div className="container mb-3">
+                <Button className="mb-3" variant="contained" color="primary" onClick={(e) => this.signup(e)} disabled={this.state.formNotValid} >Submit</Button>
+              </div>
             </div>
-          </div>
-          <div className="col-sm-1">
-            <div className="container">
-              <Button bsStyle="danger" onClick={this.props.goBack}>Back</Button>
+            <div className="col-sm-3">
+              <div className="container">
+                <Button variant="contained" color="secondary" onClick={this.props.goBack}>Back</Button>
+              </div>
             </div>
+
           </div>
-        </div>
 
-
-
-      </form>
+        </form>
+      </div>
+  </div>
     )
   }
 }
