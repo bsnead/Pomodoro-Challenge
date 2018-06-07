@@ -63,13 +63,13 @@ class CustomizedTable extends React.Component {
     for (let user in users) {
       newState.push({
         name: users[user].name,
-        numCycles: users[user].cycles,
+        numCycles: users[user].numCycles,
         index: 0
       });
     }
 
     newState.sort((a, b) => a.numCycles < b.numCycles)
-        .map((user, i) => 
+        .map((user, i) =>
         <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
       );
 
