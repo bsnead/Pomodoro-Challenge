@@ -27,27 +27,35 @@
   align-items: center;
   justify-content: center;
   height: 12vh;
+  
 }
 
 .Work-timer {
   display: flex;
-  align-items: center;
+  
   justify-content: center;
   height: 50vh;
+  margin-top:50;
+  margin-bottom:50;
 }
 
 .Start-button {
   display: flex;
-  align-items: center;
+ 
   justify-content: center;
   height: 5vh;
+  
 }
 
 .Activity-input {
   display: flex;
-  align-items: center;
+  
   justify-content: center;
   height: 50vh;
+  
 }
-
+#parappa {
+  position: static;
+  
+}
 
