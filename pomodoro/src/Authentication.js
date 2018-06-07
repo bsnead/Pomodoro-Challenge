@@ -5,7 +5,7 @@ import { Button, Row, Col, grid } from "react-bootstrap";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import logo from "./tomatologo.png";
-//import "./Authentication.css";
+import "./authentication.css";
 import { createMuiTheme } from "@material-ui/core/styles";
 import teal from "@material-ui/core/colors/teal";
 
