@@ -16,7 +16,7 @@ import {
   IconButton
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import firebase from './firebase.js'
+import fire from './fire.js'
 import sortBy from "lodash/sortBy"
 
 const CustomTableCell = withStyles(theme => ({
@@ -55,7 +55,7 @@ class CustomizedTable extends React.Component {
   }
 
   componentDidMount(){
-    const usersRef = firebase.database().ref('users');
+    const usersRef = fire.database().ref('users');
     usersRef.on('value', (snapshot) => {
     let users = snapshot.val();
     let newState = [];

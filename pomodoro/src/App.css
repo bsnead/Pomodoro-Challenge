@@ -22,7 +22,33 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12vh;
 }
+
+.Work-timer {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.Start-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+}
+
+.Activity-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+
