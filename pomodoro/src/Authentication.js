@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -6,13 +7,18 @@ import { Button, Row, Col, grid } from 'react-bootstrap';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import Background from './assets/work.jpg';
+import logo from "./tomatologo.png";
+import "./authentication.css";
+import { createMuiTheme } from "@material-ui/core/styles";
+import teal from "@material-ui/core/colors/teal";
+
 
 export default class Authentication extends Component {
   constructor() {
     super();
     this.state = {
       activeIndex: 0
-    }
+    };
     this.goBack = this.goBack.bind(this);
     this.goToSignUp = this.goToSignUp.bind(this);
   }
@@ -40,26 +46,35 @@ export default class Authentication extends Component {
     } else if(this.state.activeIndex == 1) {
       return(
         <SignUpForm goBack={this.goBack} />
+
+    });
+  };
+
+
       );
+    } else if (this.state.activeIndex == 1) {
+      return <SignUpForm goBack={this.goBack} />;
+    } else if (this.state.activeIndex == 1) {
+      return <SignUpForm goBack={this.goBack} />;
     } else {
       return(
         <SignInForm goBack={this.goBack} goToSignUp={this.goToSignUp}/>
       );
+
     }
-  }
+  };
 
   onSignUp = () => {
     this.setState({
       activeIndex: 1
-    })
-  }
+    });
+  };
 
   onSignIn = () => {
     this.setState({
       activeIndex: 2
-    })
-  }
-
+    });
+  };
 
 
   render() {
@@ -79,6 +94,7 @@ export default class Authentication extends Component {
             </div>
           </div>
         </section>
+
 
     );
   }
