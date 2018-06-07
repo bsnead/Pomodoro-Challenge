@@ -97,7 +97,7 @@ export default class Timer extends React.Component {
     hopperRef.update({
       "activity": act
     });
-
+    this.setState({ activity: "" });
   }
 
   render() {
@@ -134,7 +134,7 @@ export default class Timer extends React.Component {
           </MuiThemeProvider>
         </div>
         <div className="Activity-input">
-          <TextField name="activity" placeholder="activity" onChange={this.Change} />
+          <TextField name="activity" placeholder="activity" onChange={this.Change} value={this.state.activity} />
           <MuiThemeProvider theme={theme}>
             <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
           </MuiThemeProvider>
