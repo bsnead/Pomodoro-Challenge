@@ -51,8 +51,21 @@ export default class SignupForm extends Component {
           />
         </FormGroup>
 
-        <Button bsStyle="success" onClick={(e) => this.signup(e)}>Sign Up</Button>
-        <Button bsStyle="danger" onClick={this.props.goBack}>Back</Button>
+        <div className="row">
+          <div className="col-sm-1 mr-4">
+            <div className="container">
+              <Button bsStyle="success" onClick={(e) => this.signup(e)}>Sign Up</Button>
+            </div>
+          </div>
+          <div className="col-sm-1">
+            <div className="container">
+              <Button bsStyle="danger" onClick={this.props.goBack}>Back</Button>
+            </div>
+          </div>
+        </div>
+
+
+
       </form>
     )
   }

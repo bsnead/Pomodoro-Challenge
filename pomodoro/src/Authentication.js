@@ -24,14 +24,19 @@ export default class Authentication extends Component {
     if(this.state.activeIndex == 0) {
       return(
 
-          <Row className="show-grid">
-            <Col xs={6}>
-              <Button bsSize="large" bsStyle="info" onClick={()=> this.onSignUp()}>Sign Up</Button>
-            </Col>
-            <Col xs={6}>
-              <Button bsSize="large" bsStyle="info" onClick={()=> this.onSignIn()}>Sign In</Button>
-            </Col>
-          </Row>
+          <div className="row">
+            <div className="col-sm-2 offset-3">
+                <div className="container">
+                  <Button bsSize="large" bsStyle="info" onClick={()=> this.onSignUp()}>Sign Up</Button>
+                </div>
+              </div>
+              <div className="col-sm-2">
+                <div className="container">
+                  <Button bsSize="large" bsStyle="info" onClick={()=> this.onSignIn()}>Sign In</Button>
+                </div>
+              </div>
+
+          </div>
 
 
       );
@@ -64,21 +69,17 @@ export default class Authentication extends Component {
 
     return(
 
-      <Grid>
-          <Row className="show-grid">
-            <Col xs={12} className="text-center" style={{paddingLeft: 300}}>
-              <h1>Pomodoro App</h1>
-              <h4>Brought to you by:</h4>
-              <h2>Team Tomato</h2>
-              <div className="alert alert-primary" role="alert">
-                A simple primary alert—check it out!
+
+          <div className="jumbotron">
+            <div className="row">
+
+              <div className="col-sm-12 centered">
+                {this.renderContent()}
               </div>
-            </Col>
-          </Row>
 
-            {this.renderContent()}
+            </div>
+          </div>
 
-        </Grid>
     );
   }
 }
