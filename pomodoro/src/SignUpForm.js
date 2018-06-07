@@ -9,21 +9,19 @@ export default class SignupForm extends Component {
       email: '',
       password: '',
       name: '',
-      numCycle: 0,
-      user: []
+      numCycles: 0,
+      activities: [],
+      totalTime: 0,
+      user: [],
     }
 
   }
 
-  handleEmailChange = (e) => {
-    this.setState({ email: e.target.value })
-  }
-  handleNameChange = (e) => {
-    this.setState({ name: e.target.value })
-  }
+  handleUserInput = e => {
 
-  handlePasswordChange = (e) => {
-    this.setState({ password: e.target.value })
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   signup = e => {
@@ -42,7 +40,9 @@ export default class SignupForm extends Component {
       email: this.state.email,
       password: this.state.password,
       name: this.state.name,
-      numCycles: 0
+      numCycles: this.state.activities,
+      activities: this.state.activities,
+      totalTime: this.state.totalTime
     };
     ref.push(obj);
 
@@ -58,17 +58,17 @@ export default class SignupForm extends Component {
             name="name"
             value={this.state.name}
             placeholder="Enter Name"
-            onChange={(e) => this.handleNameChange(e)}
+            onChange={(e) => this.handleUserInput(e)}
           />
         </FormGroup>
         <FormGroup>
           <ControlLabel>Email</ControlLabel>
           <FormControl
-            name="Email"
+            name="email"
             type="text"
             value={this.state.email}
             placeholder="Enter Email"
-            onChange={(e) => this.handleEmailChange(e)}
+            onChange={(e) => this.handleUserInput(e)}
           />
         </FormGroup>
         <FormGroup>
@@ -78,7 +78,7 @@ export default class SignupForm extends Component {
             name="password"
             value={this.state.password}
             placeholder="Enter Password"
-            onChange={(e) => this.handlePasswordChange(e)}
+            onChange={(e) => this.handleUserInput(e)}
           />
         </FormGroup>
 

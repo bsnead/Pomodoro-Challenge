@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import ReactCountdownClock from 'react-countdown-clock'
 import "./App.css";
 
+
 import {
   AppBar,
   Toolbar,
@@ -22,7 +23,6 @@ import {
   createMuiTheme
 } from "@material-ui/core/styles";
 
-
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -37,32 +37,44 @@ export default class Timer extends React.Component {
       paused: true,
       activity: "",
       time: 5,
+
       status: "Work now!",
+
     };
   }
 
   startTimer = e => {
     e.preventDefault();
-    this.setState({ paused: !this.state.paused })
-  }
+
+    this.setState({ paused: !this.state.paused });
+  };
 
   switchTimes = e => {
     if (this.state.time === 5) {
-      this.setState({ time: 2.5, button_text: "Start break", status: "Take a break!" })
-    }
-    else if (this.state.time === 2.5) {
-      this.setState({ time: 5, button_text: "Start working", status: "Work now!" })
+      this.setState({
+        time: 2.5,
+        button_text: "Start break",
+        status: "Take a break!"
+      });
+    } else if (this.state.time === 2.5) {
+      this.setState({
+        time: 5,
+        button_text: "Start working",
+        status: "Work now!"
+      });
     }
     this.setState({
       paused: true
-    })
-  }
+    });
+  };
 
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
+
+  };
+
 
   render() {
     return (
@@ -72,6 +84,7 @@ export default class Timer extends React.Component {
             style={{
               backgroundColor: "darkred",
               marginBottom: 20
+
             }}
           >
             <Toolbar>
@@ -83,6 +96,7 @@ export default class Timer extends React.Component {
                 <MenuIcon />
               </IconButton>
               Timer
+
           </Toolbar>
           </AppBar>
         </div>
@@ -110,5 +124,6 @@ export default class Timer extends React.Component {
       </div>
     )
   }
+
 
 }

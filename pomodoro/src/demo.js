@@ -60,6 +60,7 @@ class CustomizedTable extends React.Component {
       let users = snapshot.val();
       let newState = [];
 
+
       for (let user in users) {
         newState.push({
           name: users[user].name,
@@ -72,6 +73,7 @@ class CustomizedTable extends React.Component {
         .map((user, i) =>
           <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
         );
+
 
       this.setState({
         data: newState
