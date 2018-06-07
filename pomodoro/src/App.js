@@ -18,8 +18,7 @@ export default class App extends Component {
     this.state = {
       user: {},
       left: false,
-      route1: '/home',
-      route2: '/timer'
+
     }
   };
 
@@ -44,11 +43,7 @@ export default class App extends Component {
 
   };
 
-  setPage = () => {
-    this.setState({
-      route: '/timer'
-    })
-  }
+  
 
   renderTimer = () => {
     return (
