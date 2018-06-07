@@ -16,10 +16,12 @@ import {
   IconButton
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import fire from './fire.js'
+import sortBy from "lodash/sortBy"
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: "teal",
+    backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white
   },
   body: {
@@ -30,12 +32,11 @@ const CustomTableCell = withStyles(theme => ({
 const styles = theme => ({
   root: {
     width: "90%",
-    margin: "auto",
     marginTop: theme.spacing.unit * 3,
     overflowX: "auto"
   },
   table: {
-    minWidth: 50
+    minWidth: 700
   },
   row: {
     "&:nth-of-type(odd)": {
@@ -43,21 +44,39 @@ const styles = theme => ({
     }
   }
 });
+
 class CustomizedTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0,
-      data: [
-        { rank: 1, name: "Ian James McCray", cycles: 36 },
-        { rank: 2, name: "Taylor", cycles: 22 },
-        { rank: 3, name: "Christian", cycles: 21 },
-        { rank: 4, name: "Bailey", cycles: 18 },
-        { rank: 5, name: "Carter", cycles: 15 },
-        { rank: 6, name: "Manana", cycles: 13 },
-        { rank: 7, name: "Edward", cycles: 1 }
-      ]
+      id:0,
+      data: []
     };
+  }
+
+  componentDidMount(){
+    const usersRef = fire.database().ref('users');
+    usersRef.on('value', (snapshot) => {
+    let users = snapshot.val();
+    let newState = [];
+
+    for (let user in users) {
+      newState.push({
+        name: users[user].name,
+        numCycles: users[user].cycles,
+        index: 0
+      });
+    }
+
+    newState.sort((a, b) => a.numCycles < b.numCycles)
+        .map((user, i) => 
+        <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
+      );
+
+      this.setState({
+        data: newState
+      });
+    });
   }
 
   render() {
@@ -68,8 +87,7 @@ class CustomizedTable extends React.Component {
         <AppBar
           position="static"
           style={{
-            backgroundColor: "darkred"
-            //backgroundColor: "#cc3737"
+            backgroundColor: "#cc3737"
           }}
         >
           <Toolbar>
@@ -80,7 +98,7 @@ class CustomizedTable extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            Leaderboard
+            Profile Page
           </Toolbar>
         </AppBar>
         <Paper
@@ -107,10 +125,10 @@ class CustomizedTable extends React.Component {
                 return (
                   <TableRow className={classes.row} key={this.state.id}>
                     <CustomTableCell component="th" scope="row">
-                      {n.rank}
+                      {n.index += 1 }
                     </CustomTableCell>
                     <CustomTableCell numeric>{n.name}</CustomTableCell>
-                    <CustomTableCell numeric>{n.cycles}</CustomTableCell>
+                    <CustomTableCell numeric>{n.numCycles}</CustomTableCell>
                   </TableRow>
                 );
               })}
