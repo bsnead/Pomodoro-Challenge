@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
+import './App.css';
 import { Button, Row, Col, grid } from 'react-bootstrap';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
@@ -68,6 +68,7 @@ export default class Authentication extends Component {
     return(
 
         <section style={{backgroundImage:`url(${Background})`, height: 1000, width: '100%'}}>
+
           <div className="jumbotron boxStyle" style={{width: '70%', textAlign: 'center'}}>
             <div className="row">
 
