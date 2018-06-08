@@ -2,11 +2,25 @@ import React, { Component } from "react";
 import { form, FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 import fire from "./fire";
 import "./Authentication.css";
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from "@material-ui/core/styles";
 
 import TextField from "@material-ui/core/TextField";
 import FormError from "./FormError";
 import purple from "@material-ui/core/colors/purple";
 import Button from "@material-ui/core/Button";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#009688",
+      contrastText: "#000"
+    }
+  }
+});
 
 export default class SignInForm extends Component {
   constructor() {
@@ -74,13 +88,15 @@ export default class SignInForm extends Component {
   render() {
     return (
       <div>
-        <h1 className="loginText">Login</h1>
+        <h1 className="loginText" color="primary">
+          Login{" "}
+        </h1>
         <form>
           <FormGroup>
             <TextField
               id="email"
               label="Email"
-              fullWidth
+              style={{ width: "85%" }}
               value={this.state.email}
               onChange={e => this.handleUserInput(e)}
             />
@@ -89,7 +105,7 @@ export default class SignInForm extends Component {
             <TextField
               id="password"
               label="Password"
-              fullWidth
+              style={{ width: "85%" }}
               value={this.state.password}
               onChange={e => this.handleUserInput(e)}
             />
@@ -109,8 +125,9 @@ export default class SignInForm extends Component {
             </div>
             <div className="col-sm-6 ml-4">
               <div className="container">
+                Dont Have an Account?
                 <Button variant="outlined" onClick={this.props.goToSignUp}>
-                  Dont Have an Account? Make One
+                  Sign Up
                 </Button>
               </div>
             </div>

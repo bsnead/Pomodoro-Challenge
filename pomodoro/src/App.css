@@ -6,7 +6,7 @@
   margin: 0 auto;
   vertical-align: middle;
   position: relative;
-  transform: translate(0,50%);
+  transform: translate(0, 50%);
 }
 
 .App-logo {
@@ -34,35 +34,31 @@
   align-items: center;
   justify-content: center;
   height: 12vh;
-  
 }
 
 .Work-timer {
   display: flex;
-  
+
   justify-content: center;
   height: 37vh;
-  margin-top:20;
-  margin-bottom:20;
+  margin-top: 20;
+  margin-bottom: 20;
 }
 
 .Start-button {
   display: flex;
- 
+
   justify-content: center;
   height: 5vh;
-  margin-bottom:20;
+  margin-bottom: 20;
 }
 
 .Activity-input {
   display: flex;
-  
+
   justify-content: center;
   height: 5vh;
-  
 }
 #parappa {
   position: static;
-  
 }
-
