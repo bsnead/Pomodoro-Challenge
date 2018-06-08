@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import ReactCountdownClock from 'react-countdown-clock'
-import fire from './fire.js'; 
+import "./App.css";
+import fire from './fire.js'
 
 import {
   AppBar,
@@ -11,7 +12,7 @@ import {
   Typography,
   IconButton,
   Button,
-  TextField
+  TextField, Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -22,7 +23,6 @@ import {
   createMuiTheme
 } from "@material-ui/core/styles";
 
-
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -31,22 +31,14 @@ const theme = createMuiTheme({
 
 export default class Timer extends React.Component {
   constructor(props) {
-        super(props);
-        this.state = {
-          user: '',
-          button_text: "Start working", 
-          paused: true, 
-          activity: "", 
-          time: 5, 
-          status: "Work now!",
-          activities: []
-        };
-      }
-
-    startTimer = e => {
-        e.preventDefault();
-        this.setState ({ paused: !this.state.paused })
+    super(props);
+    this.state = {
+      button_text: "Start working",
+      paused: true,
+      activity: "",
+      time: 5,
     }
+  }
 
      switchTimes = e => {
         if(this.state.time === 5) {
@@ -61,48 +53,58 @@ export default class Timer extends React.Component {
     }
 
     Change = e => {
+      let newAct = []
+      newAct.push(e.target.value)
       this.setState({
-        activity: e.target.value, 
+        activity: newAct 
       });
     }
     
-    onSubmit = e => {
+    Submit = e => {
         e.preventDefault();
-        const usersRef = fire.database().ref('users');
-        usersRef.on('value', (snapshot) => {
-        let users = snapshot.val();
-        let newState = [];
-
+        let vals =[];
+        let userID = "";
         var user1 = fire.auth().currentUser;
           var email1;
           if (user1 != null) {
             email1 = user1.email;
         }
-
         let i=0;
-        let vals = Object.values(users);
+        let act = []; 
+        
+        const usersRef = fire.database().ref('users');
+        usersRef.on('value', (snapshot) => {
+        let users = snapshot.val();
+
+        
+        vals = Object.values(users);
         for(i; i<vals.length; i++){
           if(email1 === vals[i].email){
+            act = vals[i].activity
             break            
           }
         }
-
-        let userID = Object.keys(users)[i];
-        var hopperRef = usersRef.child(userID);
-        this.state.activities.push(this.state.activity)
-        hopperRef.update({
-          "activity": this.state.activities
-        });
+        userID = Object.keys(users)[i];
+        
       });
+        let activities = act; 
+        activities.push(this.state.activity)
+        let hopperRef = fire.database().ref('/users/'+userID+"/activity");
+        hopperRef.update({
+          "activity": activities
+        });
+      
     }
 
     render() {
     return (
-        <div>
+      <div>
         <div>
           <AppBar position="static"
             style={{
-              backgroundColor: "#cc3737"
+              backgroundColor: "darkred",
+              marginBottom: 20
+
             }}
           >
             <Toolbar>
@@ -111,15 +113,13 @@ export default class Timer extends React.Component {
                 style={{ marginLeft: -12, marginRight: 20 }}
                 onClick={e => this.props.updateParent(true)}
               >
-              <MenuIcon />
-            </IconButton>
-            Timer
+                <MenuIcon />
+              </IconButton>
+              Timer
+
           </Toolbar>
-        </AppBar>
+          </AppBar>
         </div>
-        <div className = "status" >
-            <h2> {this.state.status} </h2> 
-        </div> 
 
         <div className = "Work-timer" >
           <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes}/>
@@ -132,11 +132,12 @@ export default class Timer extends React.Component {
         <div className = "Activity-input">
           <TextField name="activity" placeholder="activity" onChange={this.Change} />
           <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.onSubmit}> Submit </Button>
+            <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
           </MuiThemeProvider>
         </div>
-
-        </div>
-        )
-      }
+      </div>
+    )
+  }
 }
+
+// onSubmit={this.Submit}

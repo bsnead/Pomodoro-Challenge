@@ -18,7 +18,6 @@ export default class SignupForm extends Component {
   }
 
   handleUserInput = e => {
-
     this.setState({
       [e.target.name]: e.target.value
     })

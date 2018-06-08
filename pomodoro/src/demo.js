@@ -49,29 +49,31 @@ class CustomizedTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id:0,
+      id: 0,
       data: []
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const usersRef = fire.database().ref('users');
     usersRef.on('value', (snapshot) => {
-    let users = snapshot.val();
-    let newState = [];
+      let users = snapshot.val();
+      let newState = [];
 
-    for (let user in users) {
-      newState.push({
-        name: users[user].name,
-        numCycles: users[user].numCycles,
-        index: 0
-      });
-    }
 
-    newState.sort((a, b) => a.numCycles < b.numCycles)
+      for (let user in users) {
+        newState.push({
+          name: users[user].name,
+          numCycles: users[user].cycles,
+          index: 0
+        });
+      }
+
+      newState.sort((a, b) => a.numCycles < b.numCycles)
         .map((user, i) =>
-        <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
-      );
+          <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
+        );
+
 
       this.setState({
         data: newState
@@ -87,7 +89,7 @@ class CustomizedTable extends React.Component {
         <AppBar
           position="static"
           style={{
-            backgroundColor: "#cc3737"
+            backgroundColor: "darkred"
           }}
         >
           <Toolbar>
@@ -98,7 +100,7 @@ class CustomizedTable extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            Profile Page
+            Leaderboard
           </Toolbar>
         </AppBar>
         <Paper
@@ -125,7 +127,7 @@ class CustomizedTable extends React.Component {
                 return (
                   <TableRow className={classes.row} key={this.state.id}>
                     <CustomTableCell component="th" scope="row">
-                      {n.index += 1 }
+                      {n.index += 1}
                     </CustomTableCell>
                     <CustomTableCell numeric>{n.name}</CustomTableCell>
                     <CustomTableCell numeric>{n.numCycles}</CustomTableCell>
