@@ -63,7 +63,7 @@ class CustomizedTable extends React.Component {
       for (let user in users) {
         newState.push({
           name: users[user].name,
-          numCycles: users[user].cycles,
+          numCycles: users[user].numCycles,
           index: 0
         });
       }
