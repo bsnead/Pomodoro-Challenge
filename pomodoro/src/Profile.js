@@ -22,16 +22,6 @@ export default class Profile extends React.Component {
       data: []
     };
   }
-  logger() {
-    this.state.data.activities.map(n => {
-      return (
-        <div>
-          {n}
-          <br />
-        </div>
-      );
-    });
-  }
 
   componentDidMount() {
     const usersRef = fire.database().ref('users');

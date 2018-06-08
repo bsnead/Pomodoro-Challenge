@@ -40,8 +40,9 @@ export default class Timer extends React.Component {
       paused: true,
       activity: "",
       time: 1500,
-      users: [],
-      status: "Work Now!"
+      status: "Work now!",
+      numCycles: 0,
+      date: new Date().toLocaleString(),
     }
   }
 
@@ -51,16 +52,20 @@ export default class Timer extends React.Component {
   }
 
   switchTimes = e => {
-    if (this.state.time === 1500) {
-      this.setState({ time: 300, button_text: "Start break", status: "Take a break!" })
+    let count = this.state.numCycles
+    if (this.state.time === 5) {
+      this.setState({ time: 2.5, button_text: "Start break", status: "Take a break!" })
     }
-    else if (this.state.time === 300) {
-      this.setState({ time: 1500, button_text: "Start working", status: "Work now!" })
+    else if (this.state.time === 2.5) {
+      this.setState({ time: 5, button_text: "Start working", status: "Work now!", numCycles: count + 1 })
+
     }
     this.setState({
       paused: true
     })
   }
+
+
 
   Change = e => {
     let newAct = []
@@ -88,23 +93,31 @@ export default class Timer extends React.Component {
     }
     let i = 0;
     let act = [];
+    let date = [];
 
     const usersRef = fire.database().ref('users');
 
     Object.keys(this.state.users).forEach((key) => {
-      console.log(key, this.state.users[key]);
       if (this.state.users[key].email = email1) {
         userID = key;
         if (this.state.users[key].activity) {
           act = this.state.users[key].activity;
+
         } else { act = [] }
+        if (this.state.users[key].date) {
+          date = this.state.users[key].date;
+
+        } else { date = [] }
       }
     }
     );
     act.push(this.state.activity)
+    date.push(this.state.date)
     let hopperRef = fire.database().ref('/users/' + userID);
     hopperRef.update({
-      "activity": act
+      "activity": act,
+      "date": date,
+      "numCycles": this.state.numCycles,
     });
     this.setState({ activity: "" });
   }
@@ -141,40 +154,40 @@ export default class Timer extends React.Component {
           <Grid container justify="center" spacing={24}>
             <Grid item xs={12}>
               <div className="Work-timer" >
-                <ReactCountdownClock seconds={this.state.time} 
-                weight = "50" 
-                color="#b2d8d8" 
-                alpha={0.9} 
-                size={300} 
-                paused={this.state.paused} 
-                onComplete={this.switchTimes} 
-                font="roboto"/>
+                <ReactCountdownClock seconds={this.state.time}
+                  weight="50"
+                  color="#b2d8d8"
+                  alpha={0.9}
+                  size={300}
+                  paused={this.state.paused}
+                  onComplete={this.switchTimes}
+                  font="roboto" />
               </div>
             </Grid>
             <Grid item xs={12}>
               <div className="Start-button">
                 <MuiThemeProvider theme={theme}>
-                  <Button variant="contained" 
-                  color="primary" 
-                  onClick={this.startTimer}> 
-                  {this.state.button_text} </Button>
+                  <Button variant="contained"
+                    color="primary"
+                    onClick={this.startTimer}>
+                    {this.state.button_text} </Button>
                 </MuiThemeProvider>
               </div>
             </Grid>
             <Grid item xs={12} >
               <div className="Activity-input">
-                <TextField name="activity" 
-                placeholder="activity" 
-                onChange={this.Change} 
-                value={this.state.activity} />
+                <TextField name="activity"
+                  placeholder="activity"
+                  onChange={this.Change}
+                  value={this.state.activity} />
               </div>
             </Grid>
             <Grid item xs={12}>
               <div className="Start-button">
                 <MuiThemeProvider theme={theme}>
-                  <Button variant="contained" 
-                  color="primary" 
-                  onClick={this.Submit}> Submit </Button>
+                  <Button variant="contained"
+                    color="primary"
+                    onClick={this.Submit}> Submit </Button>
                 </MuiThemeProvider>
               </div >
             </Grid>
@@ -185,3 +198,5 @@ export default class Timer extends React.Component {
     )
   }
 }
+
+// onSubmit={this.Submit}
