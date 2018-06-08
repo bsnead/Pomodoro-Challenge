@@ -41,7 +41,7 @@ export default class Authentication extends Component {
       return(
         <SignUpForm goBack={this.goBack} />
       );
-    } 
+    }
   }
 
   onSignUp = () => {
@@ -62,7 +62,7 @@ export default class Authentication extends Component {
 
 
     return(
-
+      <div>
         <section style={{backgroundImage:`url(${Background})`, height: 1000, width: '100%'}}>
 
           <div className="jumbotron boxStyle" style={{width: '70%', textAlign: 'center'}}>
@@ -75,6 +75,7 @@ export default class Authentication extends Component {
             </div>
           </div>
         </section>
+      </div>
 
     );
   }
