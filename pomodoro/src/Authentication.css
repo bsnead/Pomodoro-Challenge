@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
+.Header {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .tomatologo {
   height: 65px;
   padding-bottom: 20px;

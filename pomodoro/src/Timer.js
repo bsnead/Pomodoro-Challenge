@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import ReactCountdownClock from 'react-countdown-clock'
+import ReactCountdownClock from 'react-countdown-clock';
 import "./App.css";
-import fire from './fire.js'
+import fire from './fire.js';
 
 import {
   AppBar,
@@ -25,7 +25,10 @@ import {
 
 const theme = createMuiTheme({
   palette: {
-    primary: green
+    primary: {
+      main: '#009688',
+      contrastText: "900"
+    }
   }
 });
 
@@ -36,9 +39,9 @@ export default class Timer extends React.Component {
       button_text: "Start working",
       paused: true,
       activity: "",
-      time: 5,
+      time: 1500,
       users: [],
-      status: "Work now!"
+      status: "Work Now!"
     }
   }
 
@@ -48,11 +51,11 @@ export default class Timer extends React.Component {
   }
 
   switchTimes = e => {
-    if (this.state.time === 5) {
-      this.setState({ time: 2.5, button_text: "Start break", status: "Take a break!" })
+    if (this.state.time === 1500) {
+      this.setState({ time: 300, button_text: "Start break", status: "Take a break!" })
     }
-    else if (this.state.time === 2.5) {
-      this.setState({ time: 5, button_text: "Start working", status: "Work now!" })
+    else if (this.state.time === 300) {
+      this.setState({ time: 1500, button_text: "Start working", status: "Work now!" })
     }
     this.setState({
       paused: true
@@ -138,27 +141,40 @@ export default class Timer extends React.Component {
           <Grid container justify="center" spacing={24}>
             <Grid item xs={12}>
               <div className="Work-timer" >
-                <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
+                <ReactCountdownClock seconds={this.state.time} 
+                weight = "50" 
+                color="#b2d8d8" 
+                alpha={0.9} 
+                size={300} 
+                paused={this.state.paused} 
+                onComplete={this.switchTimes} 
+                font="roboto"/>
               </div>
             </Grid>
             <Grid item xs={12}>
               <div className="Start-button">
                 <MuiThemeProvider theme={theme}>
-                  <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
+                  <Button variant="contained" 
+                  color="primary" 
+                  onClick={this.startTimer}> 
+                  {this.state.button_text} </Button>
                 </MuiThemeProvider>
               </div>
             </Grid>
             <Grid item xs={12} >
-
               <div className="Activity-input">
-
-                <TextField name="activity" placeholder="activity" onChange={this.Change} value={this.state.activity} />
+                <TextField name="activity" 
+                placeholder="activity" 
+                onChange={this.Change} 
+                value={this.state.activity} />
               </div>
             </Grid>
             <Grid item xs={12}>
               <div className="Start-button">
                 <MuiThemeProvider theme={theme}>
-                  <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
+                  <Button variant="contained" 
+                  color="primary" 
+                  onClick={this.Submit}> Submit </Button>
                 </MuiThemeProvider>
               </div >
             </Grid>
