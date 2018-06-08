@@ -96,7 +96,7 @@ export default class SignInForm extends Component {
             <TextField
               id="email"
               label="Email"
-              style={{ width: "85%" }}
+              style={{ width: "70%" }}
               value={this.state.email}
               onChange={e => this.handleUserInput(e)}
             />
@@ -105,13 +105,13 @@ export default class SignInForm extends Component {
             <TextField
               id="password"
               label="Password"
-              style={{ width: "85%" }}
+              style={{ width: "70%" }}
               value={this.state.password}
               onChange={e => this.handleUserInput(e)}
             />
           </FormGroup>
           <div className="row">
-            <div className="col-sm-1 mr-3">
+            <div className="col-md-1 col-sm-12 offset-md-3 mr-3">
               <div className="container">
                 <Button
                   variant="contained"
@@ -123,10 +123,14 @@ export default class SignInForm extends Component {
                 </Button>
               </div>
             </div>
-            <div className="col-sm-6 ml-4">
+            <div className="col-md-6 col-sm-12 ml-4">
               <div className="container">
-                Dont Have an Account?
-                <Button variant="outlined" onClick={this.props.goToSignUp}>
+                Don't Have an Account?
+                <Button
+                  variant="outlined"
+                  onClick={this.props.goToSignUp}
+                  style={{ marginLeft: 20 }}
+                >
                   Sign Up
                 </Button>
               </div>

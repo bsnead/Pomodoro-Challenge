@@ -15,6 +15,10 @@
   background-color: white;
   padding: 25px;
   border-radius: 3%;
+
+  position: absolute;
+  margin-left: 187.5px;
+  bottom: 300px;
 }
 
 .loginText {
@@ -25,4 +29,16 @@
 .signupText {
   font-size: 25px;
   font-family: "Roboto", sans-serif;
+}
+
+.content {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.auto {
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }

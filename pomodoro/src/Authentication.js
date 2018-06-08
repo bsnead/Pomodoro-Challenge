@@ -61,7 +61,7 @@ export default class Authentication extends Component {
         <section
           style={{
             backgroundImage: `url(${Background})`,
-            height: 1000,
+            height: 700,
             width: "100%",
             backgroundSize: "cover",
             overflow: "hidden"
@@ -77,10 +77,10 @@ export default class Authentication extends Component {
             </div>
           </div>
         </section>
-        <div style={{ backgroundColor: "#ba000d" }}>
+        <div style={{ backgroundColor: "#990000" }}>
           <div className="content">
             <div>
-              <h1 style={{ color: "#ffffff" }}>What Is the Pomodoro Timer?</h1>
+              <h1 style={{ color: "#009688" }}>What Is the Pomodoro Timer?</h1>
               <hr
                 style={{
                   backgroundColor: "#009688",
@@ -90,7 +90,7 @@ export default class Authentication extends Component {
                 }}
               />
               <div>
-                <p style={{ color: "#ffffff" }}>
+                <p style={{ color: "#DCDCDC" }}>
                   Our pomodoro timer is an easy to use looping timer to boost
                   your efficiency!
                 </p>
@@ -102,7 +102,7 @@ export default class Authentication extends Component {
               </SvgIcon>
             </div>
             <div>
-              <h1 style={{ color: "#ffffff" }}>About the Pomodoro Technique</h1>
+              <h1 style={{ color: "#009688" }}>About the Pomodoro Technique</h1>
               <hr
                 style={{
                   backgroundColor: "#009688",
@@ -115,7 +115,7 @@ export default class Authentication extends Component {
                 <p
                   className="auto"
                   style={{
-                    color: "#ffffff",
+                    color: "#DCDCDC",
                     width: "50%",
                     textAlign: "center"
                   }}

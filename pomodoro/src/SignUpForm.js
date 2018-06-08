@@ -55,10 +55,7 @@ export default class SignupForm extends Component {
 
   handlePasswordError = () => {
     if (this.state.password.length < 6) {
-      return (
-        <FormError name="Password of at least 6 characters long"/>
-      )
-
+      return <FormError name="Password of at least 6 characters long" />;
     }
   };
 
@@ -107,7 +104,7 @@ export default class SignupForm extends Component {
             <TextField
               id="name"
               label="Name"
-              fullWidth
+              style={{ width: "85%" }}
               value={this.state.name}
               onChange={e => this.handleUserInput(e)}
             />
@@ -117,7 +114,7 @@ export default class SignupForm extends Component {
             <TextField
               id="email"
               label="Email"
-              fullWidth
+              style={{ width: "85%" }}
               value={this.state.email}
               onChange={e => this.handleUserInput(e)}
             />
@@ -127,14 +124,14 @@ export default class SignupForm extends Component {
             <TextField
               id="password"
               label="Password"
-              fullWidth
+              style={{ width: "85%" }}
               value={this.state.password}
               onChange={e => this.handleUserInput(e)}
             />
             {this.handlePasswordError()}
           </FormGroup>
           <div className="row">
-            <div className="col-sm-3 pb-4">
+            <div className="col-sm-3 offset-3 pb-4">
               <div>
                 <Button
                   className="mb-3"
