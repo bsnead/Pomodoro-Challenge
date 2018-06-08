@@ -53,11 +53,11 @@ export default class Timer extends React.Component {
 
   switchTimes = e => {
     let count = this.state.numCycles
-    if (this.state.time === 5) {
-      this.setState({ time: 2.5, button_text: "Start break", status: "Take a break!" })
+    if (this.state.time === 1500) {
+      this.setState({ time: 300, button_text: "Start break", status: "Take a break!" })
     }
-    else if (this.state.time === 2.5) {
-      this.setState({ time: 5, button_text: "Start working", status: "Work now!", numCycles: count + 1 })
+    else if (this.state.time === 300) {
+      this.setState({ time: 1500, button_text: "Start working", status: "Work now!", numCycles: count + 1 })
 
     }
     this.setState({

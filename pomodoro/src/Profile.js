@@ -5,7 +5,8 @@ import {
   Card,
   CardContent,
   Typography,
-  IconButton
+  IconButton,
+  Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import fire from './fire';
@@ -42,7 +43,8 @@ export default class Profile extends React.Component {
             email: users[user].email,
             numCycles: users[user].numCycles,
             totalTime: users[user].totalTime,
-            activities: users[user].activity
+            activities: users[user].activity,
+            date: users[user].date
           };
       }
 
@@ -131,17 +133,31 @@ export default class Profile extends React.Component {
             <CardContent>
               {console.log(this.state.data.activities)}
 
-              <div>
-                <Typography><strong> Activity Log:</strong> {this.state.data.activities ? this.state.data.activities.map(n => {
-                  return (
-                    <div>
-                      {"date, time: " + n}
-                      <br />
-                    </div>
-                  );
-                }) : []
-                }</Typography>
-              </div>
+              <Grid container spacing={8}>
+                <Grid item xs={6} sm={3}>
+
+                  <Typography><strong> Activity Log:</strong>  {this.state.data.date ? this.state.data.date.map(n => {
+                    return (
+                      <div>
+                        {n}
+                        <br />
+                      </div>
+                    );
+                  }) : []
+                  }</Typography>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Typography><strong>   <br /></strong> {this.state.data.activities ? this.state.data.activities.map(n => {
+                    return (
+                      <div>
+                        {n}
+                        <br />
+                      </div>
+                    );
+                  }) : []
+                  }</Typography>
+                </Grid>
+              </Grid>
 
 
             </CardContent>
