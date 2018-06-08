@@ -64,14 +64,14 @@ class CustomizedTable extends React.Component {
         newState.push({
           name: users[user].name,
           numCycles: users[user].numCycles,
-          index: 0
+          index: 1
         });
       }
 
       newState.sort((a, b) => a.numCycles < b.numCycles).map((user, i) => (
         <div key={i}>
           {" "}
-          {user.name} {user.cycles} {(user.index = i)}
+          {user.name} {user.cycles} {(user.index = i + 1)}
         </div>
       ));
 
@@ -127,7 +127,7 @@ class CustomizedTable extends React.Component {
                 return (
                   <TableRow className={classes.row} key={this.state.id}>
                     <CustomTableCell component="th" scope="row">
-                      {(n.index += 1)}
+                      {(n.index)}
                     </CustomTableCell>
                     <CustomTableCell numeric>{n.name}</CustomTableCell>
                     <CustomTableCell numeric>{n.numCycles}</CustomTableCell>
