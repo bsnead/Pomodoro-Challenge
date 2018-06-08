@@ -37,8 +37,14 @@ export default class Timer extends React.Component {
       paused: true,
       activity: "",
       time: 5,
-      users: []
+      users: [],
+      status: "Work now!"
     }
+  }
+
+  startTimer = e => {
+    e.preventDefault();
+    this.setState({ paused: !this.state.paused });
   }
 
   switchTimes = e => {
@@ -125,21 +131,41 @@ export default class Timer extends React.Component {
           </AppBar>
         </div>
 
-        <div className="Work-timer" >
-          <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
+        <div className="status">
+          <h2>{this.state.status}</h2>
         </div>
-        <div className="Start-button">
-          <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
-          </MuiThemeProvider>
-        </div>
-        <div className="Activity-input">
-          <TextField name="activity" placeholder="activity" onChange={this.Change} value={this.state.activity} />
-          <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
-          </MuiThemeProvider>
+        <div id="parappa">
+          <Grid container justify="center" spacing={24}>
+            <Grid item xs={12}>
+              <div className="Work-timer" >
+                <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="Start-button">
+                <MuiThemeProvider theme={theme}>
+                  <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
+                </MuiThemeProvider>
+              </div>
+            </Grid>
+            <Grid item xs={12} >
+
+              <div className="Activity-input">
+
+                <TextField name="activity" placeholder="activity" onChange={this.Change} value={this.state.activity} />
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="Start-button">
+                <MuiThemeProvider theme={theme}>
+                  <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
+                </MuiThemeProvider>
+              </div >
+            </Grid>
+          </Grid>
         </div>
       </div>
+
     )
   }
 }
