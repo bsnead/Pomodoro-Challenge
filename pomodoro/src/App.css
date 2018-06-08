@@ -41,9 +41,9 @@
   display: flex;
   
   justify-content: center;
-  height: 50vh;
-  margin-top:50;
-  margin-bottom:50;
+  height: 37vh;
+  margin-top:20;
+  margin-bottom:20;
 }
 
 .Start-button {
@@ -51,14 +51,14 @@
  
   justify-content: center;
   height: 5vh;
-  
+  margin-bottom:20;
 }
 
 .Activity-input {
   display: flex;
   
   justify-content: center;
-  height: 50vh;
+  height: 5vh;
   
 }
 #parappa {

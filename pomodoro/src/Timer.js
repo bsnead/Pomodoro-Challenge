@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import ReactCountdownClock from 'react-countdown-clock'
 import "./App.css";
-
+import fire from './fire.js'
 
 import {
   AppBar,
@@ -37,44 +37,74 @@ export default class Timer extends React.Component {
       paused: true,
       activity: "",
       time: 5,
-
-      status: "Work now!",
-
-    };
+      users: [],
+      status: "Work now!"
+    }
   }
 
   startTimer = e => {
     e.preventDefault();
-
     this.setState({ paused: !this.state.paused });
-  };
+  }
 
   switchTimes = e => {
     if (this.state.time === 5) {
-      this.setState({
-        time: 2.5,
-        button_text: "Start break",
-        status: "Take a break!"
-      });
-    } else if (this.state.time === 2.5) {
-      this.setState({
-        time: 5,
-        button_text: "Start working",
-        status: "Work now!"
-      });
+      this.setState({ time: 2.5, button_text: "Start break", status: "Take a break!" })
+    }
+    else if (this.state.time === 2.5) {
+      this.setState({ time: 5, button_text: "Start working", status: "Work now!" })
     }
     this.setState({
       paused: true
-    });
-  };
+    })
+  }
 
-  onChange = e => {
+  Change = e => {
+    let newAct = []
+    newAct.push(e.target.value)
     this.setState({
-      [e.target.name]: e.target.value
+      activity: newAct
     });
+  }
+  componentDidMount() {
+    const usersRef = fire.database().ref('users');
+    usersRef.on('value', (snapshot) => {
+      let users1 = snapshot.val();
+      this.setState({ users: users1 });
+    });
+  }
 
-  };
+  Submit = e => {
+    e.preventDefault();
+    let vals = [];
+    let userID = "";
+    var user1 = fire.auth().currentUser;
+    var email1;
+    if (user1 != null) {
+      email1 = user1.email;
+    }
+    let i = 0;
+    let act = [];
 
+    const usersRef = fire.database().ref('users');
+
+    Object.keys(this.state.users).forEach((key) => {
+      console.log(key, this.state.users[key]);
+      if (this.state.users[key].email = email1) {
+        userID = key;
+        if (this.state.users[key].activity) {
+          act = this.state.users[key].activity;
+        } else { act = [] }
+      }
+    }
+    );
+    act.push(this.state.activity)
+    let hopperRef = fire.database().ref('/users/' + userID);
+    hopperRef.update({
+      "activity": act
+    });
+    this.setState({ activity: "" });
+  }
 
   render() {
     return (
@@ -101,29 +131,41 @@ export default class Timer extends React.Component {
           </AppBar>
         </div>
 
-        <div className="status" >
-          <h2> {this.state.status} </h2>
+        <div className="status">
+          <h2>{this.state.status}</h2>
         </div>
-
         <div id="parappa">
-          <div className="Work-timer">
-            <ReactCountdownClock style={{ marginTop: 40, marginBottom: 40 }} seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
-          </div>
+          <Grid container justify="center" spacing={24}>
+            <Grid item xs={12}>
+              <div className="Work-timer" >
+                <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="Start-button">
+                <MuiThemeProvider theme={theme}>
+                  <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
+                </MuiThemeProvider>
+              </div>
+            </Grid>
+            <Grid item xs={12} >
 
-          <div className="Start-button">
-            <MuiThemeProvider theme={theme} >
-              <Button style={{ position: "fixed", marginTop: 40, marginBottom: 40 }} position="static" variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
-            </MuiThemeProvider>
-          </div>
+              <div className="Activity-input">
 
-          <div className="Activity-input">
-            <TextField style={{ position: "static", marginTop: 70, marginBottom: 40 }} position="static" name="activity" placeholder="activity" onChange={this.onChange} />
-          </div>
+                <TextField name="activity" placeholder="activity" onChange={this.Change} value={this.state.activity} />
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="Start-button">
+                <MuiThemeProvider theme={theme}>
+                  <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
+                </MuiThemeProvider>
+              </div >
+            </Grid>
+          </Grid>
         </div>
-
       </div>
+
     )
   }
-
-
 }

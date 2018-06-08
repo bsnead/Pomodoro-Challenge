@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -6,8 +7,14 @@ import './Authentication.css';
 import { Button, Row, Col, grid } from 'react-bootstrap';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import Background from './assets/work.jpg';
+
 import SvgIcon from '@material-ui/core/SvgIcon';
+import Background from "./assets/desk2.jpg";
+import logo from "./tomatologo.png";
+
+import { createMuiTheme } from "@material-ui/core/styles";
+import teal from "@material-ui/core/colors/teal";
+
 
 export default class Authentication extends Component {
   constructor() {
@@ -19,15 +26,15 @@ export default class Authentication extends Component {
     this.goToSignUp = this.goToSignUp.bind(this);
   }
 
-
   goBack = () => {
     this.setState({
       activeIndex: 0
-    })
-  }
+    });
+  };
   goToSignUp = () => {
     this.setState({
       activeIndex: 1
+
     })
   }
 
@@ -43,6 +50,7 @@ export default class Authentication extends Component {
       return(
         <SignUpForm goBack={this.goBack} />
       );
+
     }
   }
 
@@ -59,24 +67,24 @@ export default class Authentication extends Component {
   }
 
 
-
   render() {
 
-
-    return(
-      <div>
-        <section style={{backgroundImage:`url(${Background})`, height: 1000, width: '100%'}}>
-
-          <div className="jumbotron boxStyle" style={{width: '70%', textAlign: 'center'}}>
-            <div className="row">
-
-              <div className="col-sm-12 centered">
-                {this.renderContent()}
-              </div>
-
-            </div>
+    return (
+      <section
+        style={{
+          backgroundImage: `url(${Background})`,
+          height: 1000,
+          width: "100%",
+          backgroundSize: "cover",
+          overflow: "hidden"
+        }}
+      >
+        <div className="boxStyle" style={{ width: "70%", textAlign: "center" }}>
+          <img src={logo} className="tomatologo" alt="logo" />
+          <div className="row">
+            <div className="col-sm-12 centered">{this.renderContent()}</div>
           </div>
-        </section>
+        </div>
         <div style={{backgroundColor: '#ba000d'}}>
           <div className="content">
             <div>
@@ -105,7 +113,7 @@ export default class Authentication extends Component {
 
           </div>
         </div>
-      </div>
+      </section>
 
     );
   }
