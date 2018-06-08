@@ -16,12 +16,12 @@ import {
   IconButton
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import fire from './fire.js'
-import sortBy from "lodash/sortBy"
+import fire from "./fire.js";
+import sortBy from "lodash/sortBy";
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "teal",
     color: theme.palette.common.white
   },
   body: {
@@ -36,7 +36,7 @@ const styles = theme => ({
     overflowX: "auto"
   },
   table: {
-    minWidth: 700
+    minWidth: 200
   },
   row: {
     "&:nth-of-type(odd)": {
@@ -55,11 +55,10 @@ class CustomizedTable extends React.Component {
   }
 
   componentDidMount() {
-    const usersRef = fire.database().ref('users');
-    usersRef.on('value', (snapshot) => {
+    const usersRef = fire.database().ref("users");
+    usersRef.on("value", snapshot => {
       let users = snapshot.val();
       let newState = [];
-
 
       for (let user in users) {
         newState.push({
@@ -69,11 +68,12 @@ class CustomizedTable extends React.Component {
         });
       }
 
-      newState.sort((a, b) => a.numCycles < b.numCycles)
-        .map((user, i) =>
-          <div key={i}> {user.name} {user.cycles} {user.index = i}</div>
-        );
-
+      newState.sort((a, b) => a.numCycles < b.numCycles).map((user, i) => (
+        <div key={i}>
+          {" "}
+          {user.name} {user.cycles} {(user.index = i)}
+        </div>
+      ));
 
       this.setState({
         data: newState
@@ -127,7 +127,7 @@ class CustomizedTable extends React.Component {
                 return (
                   <TableRow className={classes.row} key={this.state.id}>
                     <CustomTableCell component="th" scope="row">
-                      {n.index += 1}
+                      {(n.index += 1)}
                     </CustomTableCell>
                     <CustomTableCell numeric>{n.name}</CustomTableCell>
                     <CustomTableCell numeric>{n.numCycles}</CustomTableCell>
