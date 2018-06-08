@@ -22,29 +22,39 @@ export default class Profile extends React.Component {
       data: []
     };
   }
+  logger() {
+    this.state.data.activities.map(n => {
+      return (
+        <div>
+          {n}
+          <br />
+        </div>
+      );
+    });
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     const usersRef = fire.database().ref('users');
     usersRef.on('value', (snapshot) => {
-    let users = snapshot.val();
-    let newState = [];
-    
-    var user1 = fire.auth().currentUser;
+      let users = snapshot.val();
+      let newState = {};
+
+      var user1 = fire.auth().currentUser;
       var email1;
       if (user1 != null) {
         email1 = user1.email;
-    }
+      }
 
-    for (let user in users) {
-       if(users[user].email == email1)
-        newState.push({
-        name: users[user].name,
-        email: users[user].email,
-        numCycles: users[user].numCycles,
-        totalTime: users[user].totalTime,
-        activities: users[user].activities + " - date " + " - time" +","
-      });
-    }
+      for (let user in users) {
+        if (users[user].email == email1)
+          newState = {
+            name: users[user].name,
+            email: users[user].email,
+            numCycles: users[user].numCycles,
+            totalTime: users[user].totalTime,
+            activities: users[user].activity
+          };
+      }
 
       this.setState({
         data: newState
@@ -55,8 +65,8 @@ export default class Profile extends React.Component {
   render() {
     var user1 = fire.auth().currentUser;
     var activity1;
-      if (user1 != null) {
-        activity1 = user1.activities;
+    if (user1 != null) {
+      activity1 = user1.activities;
     }
     console.log(user1)
     return (
@@ -90,14 +100,12 @@ export default class Profile extends React.Component {
         >
 
           <CardContent>
-              {this.state.data.map(n => {
-                return (
-                  <div>
-                  <Typography><strong>Name: {n.name}</strong></Typography>
-                  <Typography><strong>Email: {n.email}</strong></Typography>
-                  </div>
-                );
-              })}
+            <div>
+              <Typography><strong>Name:</strong> {this.state.data.name}</Typography>
+              <Typography><strong>Email: </strong>{this.state.data.email}</Typography>
+            </div>
+
+
           </CardContent>
 
         </Card>
@@ -110,14 +118,13 @@ export default class Profile extends React.Component {
           }}
         >
           <CardContent>
-          {this.state.data.map(n => {
-                return (
-                  <div>
-                  <Typography><strong> Total Number of Cycles: {n.numCycles} cycles</strong></Typography>
-                  <Typography><strong> Total Time You've Been Working: {n.totalTime} minutes</strong></Typography>
-                  </div>
-                );
-              })}
+
+            <div>
+              <Typography><strong> Total Number of Cycles:</strong> {this.state.data.numCycles} cycles</Typography>
+              <Typography><strong> Total Time You've Been Working: </strong>{this.state.data.totalTime} minutes</Typography>
+            </div>
+
+
           </CardContent>
         </Card>
 
@@ -132,13 +139,21 @@ export default class Profile extends React.Component {
             }}
           >
             <CardContent>
-            {this.state.data.map(n => {
-                return (
-                  <div>
-                  <Typography><strong> Activity Log: {n.activities}</strong></Typography>
-                  </div>
-                );
-              })}
+              {console.log(this.state.data.activities)}
+
+              <div>
+                <Typography><strong> Activity Log:</strong> {this.state.data.activities ? this.state.data.activities.map(n => {
+                  return (
+                    <div>
+                      {"date, time: " + n}
+                      <br />
+                    </div>
+                  );
+                }) : []
+                }</Typography>
+              </div>
+
+
             </CardContent>
           </Card>
         </div>
