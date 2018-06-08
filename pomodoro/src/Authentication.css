@@ -1,11 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
-.Header {
-  text-align: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
-
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
 .tomatologo {
   height: 65px;
@@ -16,9 +9,6 @@
   background-color: white;
   padding: 25px;
   border-radius: 3%;
-  /* border-color: darkred;
-  border-width: 2px;
-  border-style: solid; */
 }
 
 .loginText {
@@ -29,17 +19,4 @@
 .signupText {
   font-size: 25px;
   font-family: "Roboto", sans-serif;
-}
-
-.content {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px
-}
-p, h1 {
-  font-family: "Roboto"
-}
-
-.auto {
-  margin: 0 auto
 }
