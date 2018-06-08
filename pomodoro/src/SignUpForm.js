@@ -55,9 +55,9 @@ export default class SignupForm extends Component {
   }
 
   handlePasswordError = () => {
-    if (this.state.password.length < 1) {
+    if (this.state.password.length < 6) {
       return (
-        <FormError name="Password"/>
+        <FormError name="Password of at least 6 characters long"/>
       )
     }
   }
