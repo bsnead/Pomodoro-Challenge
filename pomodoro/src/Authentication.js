@@ -41,11 +41,7 @@ export default class Authentication extends Component {
       return(
         <SignUpForm goBack={this.goBack} />
       );
-    } else {
-      return(
-        <SignInForm goBack={this.goBack} goToSignUp={this.goToSignUp}/>
-      );
-    }
+    } 
   }
 
   onSignUp = () => {
