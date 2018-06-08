@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import ReactCountdownClock from 'react-countdown-clock'
+import ReactCountdownClock from 'react-countdown-clock'; 
 import "./App.css";
-import fire from './fire.js'
+import fire from './fire.js'; 
 
 import {
   AppBar,
@@ -37,66 +37,89 @@ export default class Timer extends React.Component {
       paused: true,
       activity: "",
       time: 5,
+      users: [],
+      status: "Work now!", 
+      numCycles: 0, 
+      date: new Date().toLocaleString(), 
     }
   }
 
-     switchTimes = e => {
-        if(this.state.time === 5) {
-            this.setState({time: 2.5, button_text: "Start break", status: "Take a break!"})
-        }
-        else if(this.state.time === 2.5) {
-            this.setState({time: 5, button_text: "Start working", status: "Work now!"})
-        }
-        this.setState({
-            paused: true
-        })
-    }
+  startTimer = e => {
+    e.preventDefault();
+    this.setState({ paused: !this.state.paused });
+  }
 
-    Change = e => {
-      let newAct = []
-      newAct.push(e.target.value)
-      this.setState({
-        activity: newAct 
-      });
+  switchTimes = e => {
+    let count = this.state.numCycles
+    if (this.state.time === 5) {
+      this.setState({ time: 2.5, button_text: "Start break", status: "Take a break!" })
     }
-    
-    Submit = e => {
-        e.preventDefault();
-        let vals =[];
-        let userID = "";
-        var user1 = fire.auth().currentUser;
-          var email1;
-          if (user1 != null) {
-            email1 = user1.email;
-        }
-        let i=0;
-        let act = []; 
-        
-        const usersRef = fire.database().ref('users');
-        usersRef.on('value', (snapshot) => {
-        let users = snapshot.val();
-
-        
-        vals = Object.values(users);
-        for(i; i<vals.length; i++){
-          if(email1 === vals[i].email){
-            act = vals[i].activity
-            break            
-          }
-        }
-        userID = Object.keys(users)[i];
-        
-      });
-        let activities = act; 
-        activities.push(this.state.activity)
-        let hopperRef = fire.database().ref('/users/'+userID+"/activity");
-        hopperRef.update({
-          "activity": activities
-        });
-      
+    else if (this.state.time === 2.5) {
+      this.setState({ time: 5, button_text: "Start working", status: "Work now!", numCycles: count + 1 })
     }
+    this.setState({
+      paused: true
+    })
+  }
 
-    render() {
+  
+
+  Change = e => {
+    let newAct = []
+    newAct.push(e.target.value)
+    this.setState({
+      activity: newAct
+    });
+  }
+  componentDidMount() {
+    const usersRef = fire.database().ref('users');
+    usersRef.on('value', (snapshot) => {
+      let users1 = snapshot.val();
+      this.setState({ users: users1 });
+    });
+  }
+
+  Submit = e => {
+    e.preventDefault();
+    let vals = [];
+    let userID = "";
+    var user1 = fire.auth().currentUser;
+    var email1;
+    if (user1 != null) {
+      email1 = user1.email;
+    }
+    let i = 0;
+    let act = [];
+    let date = []; 
+
+    const usersRef = fire.database().ref('users');
+
+    Object.keys(this.state.users).forEach((key) => {
+      if (this.state.users[key].email = email1) {
+        userID = key;
+        if (this.state.users[key].activity) {
+          act = this.state.users[key].activity;
+          
+        } else { act = [] }
+        if (this.state.users[key].date) {
+          date = this.state.users[key].date;
+          
+        } else { date = [] }
+      }
+    }
+    );
+    act.push(this.state.activity)
+    date.push(this.state.date)
+    let hopperRef = fire.database().ref('/users/' + userID);
+    hopperRef.update({
+      "activity": act, 
+      "date": date, 
+      "numCycles": this.state.numCycles, 
+    });
+    this.setState({ activity: "" });
+  }
+
+  render() {
     return (
       <div>
         <div>
@@ -121,21 +144,41 @@ export default class Timer extends React.Component {
           </AppBar>
         </div>
 
-        <div className = "Work-timer" >
-          <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes}/>
+        <div className="status">
+          <h2>{this.state.status}</h2>
         </div>
-        <div className = "Start-button"> 
-          <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
-          </MuiThemeProvider>
-        </div> 
-        <div className = "Activity-input">
-          <TextField name="activity" placeholder="activity" onChange={this.Change} />
-          <MuiThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
-          </MuiThemeProvider>
+        <div id="parappa">
+          <Grid container justify="center" spacing={24}>
+            <Grid item xs={12}>
+              <div className="Work-timer" >
+                <ReactCountdownClock seconds={this.state.time} color="#000" alpha={0.9} size={300} paused={this.state.paused} onComplete={this.switchTimes} />
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="Start-button">
+                <MuiThemeProvider theme={theme}>
+                  <Button variant="contained" color="primary" onClick={this.startTimer}> {this.state.button_text} </Button>
+                </MuiThemeProvider>
+              </div>
+            </Grid>
+            <Grid item xs={12} >
+
+              <div className="Activity-input">
+
+                <TextField name="activity" placeholder="activity" onChange={this.Change} value={this.state.activity} />
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className="Start-button">
+                <MuiThemeProvider theme={theme}>
+                  <Button variant="contained" color="primary" onClick={this.Submit}> Submit </Button>
+                </MuiThemeProvider>
+              </div >
+            </Grid>
+          </Grid>
         </div>
       </div>
+
     )
   }
 }

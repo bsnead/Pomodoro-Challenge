@@ -1,13 +1,17 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import { Button, Row, Col, grid } from "react-bootstrap";
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SignUpForm";
+
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import './App.css';
+import { Button, Row, Col, grid } from 'react-bootstrap';
+import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
+import Background from './assets/desk2.jpg';
 import logo from "./tomatologo.png";
 import "./authentication.css";
 import { createMuiTheme } from "@material-ui/core/styles";
 import teal from "@material-ui/core/colors/teal";
+
 
 export default class Authentication extends Component {
   constructor() {
@@ -16,48 +20,36 @@ export default class Authentication extends Component {
       activeIndex: 0
     };
     this.goBack = this.goBack.bind(this);
+    this.goToSignUp = this.goToSignUp.bind(this);
   }
+
 
   goBack = () => {
     this.setState({
       activeIndex: 0
-    });
-  };
+    })
+  }
+  goToSignUp = () => {
+    this.setState({
+      activeIndex: 1
+    })
+  }
 
   renderContent = () => {
     if (this.state.activeIndex == 0) {
       return (
-        <div className="row">
-          <div className="col-sm-2 offset-3">
-            <div className="container">
-              <Button
-                bsSize="large"
-                bsStyle="info"
-                onClick={() => this.onSignUp()}
-              >
-                Sign Up
-              </Button>
-            </div>
-          </div>
-          <div className="col-sm-2">
-            <div className="container">
-              <Button
-                bsSize="large"
-                bsStyle="info"
-                onClick={() => this.onSignIn()}
-              >
-                Sign In
-              </Button>
-            </div>
-          </div>
-        </div>
+        <SignInForm goToSignUp={this.goToSignUp} />
       );
     } else if (this.state.activeIndex == 1) {
-      return <SignUpForm goBack={this.goBack} />;
-    } else if (this.state.activeIndex == 1) {
-      return <SignUpForm goBack={this.goBack} />;
+      return (
+        <SignUpForm goBack={this.goBack} />
+
+      );
     } else {
-      return <SignInForm goBack={this.goBack} />;
+      return (
+        <SignInForm goBack={this.goBack} goToSignUp={this.goToSignUp} />
+      );
+
     }
   };
 
@@ -73,16 +65,27 @@ export default class Authentication extends Component {
     });
   };
 
+
   render() {
+
+
     return (
-      <div>
-        <div>
-          <header className="Header">
-            <img src={logo} className="tomato-logo" alt="logo" />
-          </header>
+
+      <section style={{
+        backgroundImage: `url(${Background})`, height: 1000, width: '100%', backgroundSize: 'cover',
+        overflow: 'hidden',
+      }}>
+        <div className="jumbotron boxStyle" style={{ width: '70%', textAlign: 'center' }}>
+          <div className="row">
+            <div className="col-sm-12 centered">
+              {this.renderContent()}
+            </div>
+
+          </div>
         </div>
-        {this.renderContent()}
-      </div>
+      </section>
+
+
     );
   }
 }

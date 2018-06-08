@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.boxStyle {
+  margin: 0 auto;
+  vertical-align: middle;
+  position: relative;
+  transform: translate(0,50%);
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -34,9 +41,9 @@
   display: flex;
   
   justify-content: center;
-  height: 50vh;
-  margin-top:50;
-  margin-bottom:50;
+  height: 37vh;
+  margin-top:20;
+  margin-bottom:20;
 }
 
 .Start-button {
@@ -44,14 +51,14 @@
  
   justify-content: center;
   height: 5vh;
-  
+  margin-bottom:20;
 }
 
 .Activity-input {
   display: flex;
   
   justify-content: center;
-  height: 50vh;
+  height: 5vh;
   
 }
 #parappa {

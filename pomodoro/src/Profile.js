@@ -8,21 +8,57 @@ import {
   IconButton
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import fire from './fire';
+
 
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      github: "",
-      activitylog: [],
-      numCycles: 0,
+      activities: [],
       totalCycles: 0,
-      totalTime: 0
+      totalTime: 0,
+      data: []
     };
   }
 
+  componentDidMount(){
+    const usersRef = fire.database().ref('users');
+    usersRef.on('value', (snapshot) => {
+    let users = snapshot.val();
+    let newState = [];
+    
+    var user1 = fire.auth().currentUser;
+      var email1;
+      if (user1 != null) {
+        email1 = user1.email;
+    }
+
+    for (let user in users) {
+       if(users[user].email == email1)
+        newState.push({
+        name: users[user].name,
+        email: users[user].email,
+        numCycles: users[user].numCycles,
+        totalTime: users[user].totalTime,
+        activities: users[user].activities + " - date " + " - time" +","
+      });
+    }
+
+      this.setState({
+        data: newState
+      });
+    });
+  }
+
   render() {
+    var user1 = fire.auth().currentUser;
+    var activity1;
+      if (user1 != null) {
+        activity1 = user1.activities;
+    }
+    console.log(user1)
     return (
       <div>
         <AppBar
@@ -52,14 +88,18 @@ export default class Profile extends React.Component {
             marginBottom: 20
           }}
         >
+
           <CardContent>
-            <Typography>
-              <strong>Name: {this.state.name} </strong>
-            </Typography>
-            <Typography>
-              <strong>GitHub: {this.state.github} </strong>
-            </Typography>
+              {this.state.data.map(n => {
+                return (
+                  <div>
+                  <Typography><strong>Name: {n.name}</strong></Typography>
+                  <Typography><strong>Email: {n.email}</strong></Typography>
+                  </div>
+                );
+              })}
           </CardContent>
+
         </Card>
         <Card
           style={{
@@ -70,15 +110,14 @@ export default class Profile extends React.Component {
           }}
         >
           <CardContent>
-            <Typography>
-              <strong>Number of Cycles Today: {this.state.numCycles} </strong>
-            </Typography>
-            <Typography>
-              <strong>Total Number of Cycles: {this.state.totalCycles} </strong>
-            </Typography>
-            <Typography>
-              <strong>Total Time: {this.state.totalTime} </strong>
-            </Typography>
+          {this.state.data.map(n => {
+                return (
+                  <div>
+                  <Typography><strong> Total Number of Cycles: {n.numCycles} cycles</strong></Typography>
+                  <Typography><strong> Total Time You've Been Working: {n.totalTime} minutes</strong></Typography>
+                  </div>
+                );
+              })}
           </CardContent>
         </Card>
 
@@ -92,7 +131,15 @@ export default class Profile extends React.Component {
               height: 500
             }}
           >
-            <CardContent />
+            <CardContent>
+            {this.state.data.map(n => {
+                return (
+                  <div>
+                  <Typography><strong> Activity Log: {n.activities}</strong></Typography>
+                  </div>
+                );
+              })}
+            </CardContent>
           </Card>
         </div>
       </div>
