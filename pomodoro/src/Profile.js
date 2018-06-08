@@ -43,13 +43,6 @@ export default class Profile extends React.Component {
         numCycles: users[user].numCycles,
         totalTime: users[user].totalTime,
         activities: users[user].activities + " - date " + " - time" +","
-        /*
-        ****
-        GRAB DATA FROM FIELDS LIKE TOTAL
-        TIME ELAPSED, EMAIL/NAME, OTHER FIELDS
-        GITHUB (?), ACTIVITY LOG
-        ****
-        */
       });
     }
 
