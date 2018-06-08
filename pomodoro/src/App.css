@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 .App {
   text-align: center;
 }
 
 .boxStyle {
   margin: 0 auto;
-  vertical-align: middle;
+
   position: relative;
   transform: translate(0,50%);
 }
@@ -34,7 +36,8 @@
   align-items: center;
   justify-content: center;
   height: 12vh;
-  
+  font-family: roboto;
+  font-weight: lighter;
 }
 
 .Work-timer {
