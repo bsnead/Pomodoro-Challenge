@@ -121,7 +121,7 @@ export default class Profile extends React.Component {
 
             <div>
               <Typography><strong> Total Number of Cycles:</strong> {this.state.data.numCycles} cycles</Typography>
-              <Typography><strong> Total Time You've Been Working: </strong>{this.state.data.totalTime} minutes</Typography>
+              <Typography><strong> Total Time You've Been Working: </strong>{this.state.data.numCycles * 30} minutes</Typography>
             </div>
 
 
